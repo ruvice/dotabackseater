@@ -1,12 +1,7 @@
-// models/User.ts
-
-export class Item {
-    id: number;
-    name: string;
-
-    constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name;
-    }
+// models/item.ts
+export interface Item {
+    id: string;
+    name: string,
+    item_name: string,
+    cost: number
 }
-  

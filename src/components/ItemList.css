@@ -1,0 +1,15 @@
+.btn-voteItem {
+    @apply bg-dota-med-tile-background hover:border-border-color-hover py-2 m-1.5 mx-8 rounded border-2 border-border-color
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-dota-tab-background rounded-lg min-h-12;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-dota-med-tile-background;
+}
