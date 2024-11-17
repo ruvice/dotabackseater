@@ -1,6 +1,6 @@
 import "./ItemList.css"
 import { useEffect, useState, useMemo } from 'react';
-import { Item } from '../models/item';
+import { Item } from '../../models/item';
 import ItemCard from './ItemCard'
 
 // Define the type of the data being fetched
@@ -52,64 +52,15 @@ function ItemList() {
     fetchData();
   }, []);
 
-
-  const handleClick = async (item: Item) => {
-    try {
-      console.log("Sending message")
-      const response = await fetch(`http://localhost:3000/debug/messagev2`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "message": `Chat thinks you should buy ${item.name}`,
-          "channel_id": channelId,
-          "ebs_token": token,
-          "client_id": clientId
-        })
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch(err) {
-      console.log("Failed to send")
-    }
-  }
-  
-  const handleVote = async (item_id: string) => {
-    try {
-      console.log(`Voting for ${item_id}`)
-      const response = await fetch(`http://localhost:3000/vote/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "channel_id": channelId,
-          "twitch_id": userId,
-          "item_id": item_id
-        })
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch(err) {
-      console.log("Failed to send")
-    }
-  }
-
   const items = useMemo(() => { 
     // Your logic for generating items
     return itemsArr.map((item: Item) => (
-        <ItemCard item={item} handleVote={handleVote} />
-        // <button className="btn-voteItem group" key={item.id} onClick={() => handleVote(item.id)}>
-        //     <p className="text-dota-text-white text-xs">{item.name}</p>
-        // </button>
+        <ItemCard item={item} />
     ));
   }, [itemsArr]); // Re-runs when `someDependency` changes
 
   return (
-    <div className="flex flex-col item-list overflow-y-auto h-[250px] mt-3 custom-scrollbar">
+    <div className="flex flex-col overflow-y-auto h-[250px] mt-3 custom-scrollbar">
         {items}
     </div>
   );

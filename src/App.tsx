@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Item } from './models/item';
-import ItemList from './components/ItemList'
+import ItemList from './components/vote/ItemList'
+import VoteSection from './components/vote/votesection/VoteSection';
 
 // Define the type of the data being fetched
 type ItemDetail = {
@@ -18,6 +19,8 @@ function App() {
             Suggest an item
         </h1>
         <ItemList />
+        
+        <VoteSection />
     </div>
   );
 }

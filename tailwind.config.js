@@ -18,7 +18,8 @@ module.exports = {
         'dota-tab-background': '#313131',
         'dota-text-white': "#fff",
         'border-color': '#282828',
-        'border-color-hover': '#D7D7D7'
+        'border-color-hover': '#D7D7D7',
+        'dota-selection-green': '#5CAD5C'
       },
       backgroundImage: {
         'dota-dark-tile-background': 'linear-gradient(80deg, rgb(21, 22, 22) 0%, rgb(4, 5, 5) 100%)',

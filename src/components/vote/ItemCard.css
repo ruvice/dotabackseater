@@ -1,0 +1,3 @@
+.btn-voteItem {
+    @apply bg-dota-med-tile-background hover:border-border-color-hover py-2 m-1.5 mx-8 rounded border-2 border-border-color
+}

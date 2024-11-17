@@ -1,0 +1,6 @@
+.vote-sectionValid {
+    @apply bg-dota-selection-green h-[50px] mt-4 rounded border-2 border-border-color
+}
+.vote-sectionInvalid {
+    @apply bg-dota-light-background h-[50px] mt-4 rounded border-2 border-border-color
+}
