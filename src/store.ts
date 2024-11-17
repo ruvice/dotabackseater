@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import voteReducer from './components/vote/voteSlice';
+import searchReducer from './components/search/searchSlice'
+import twitchReducer from './twitch/twitchSlice'
 const store = configureStore({
   reducer: {
-    vote: voteReducer
+    vote: voteReducer,
+    search: searchReducer,
+    twitch: twitchReducer
   },
 });
 

@@ -13,8 +13,11 @@ const voteSlice = createSlice({
     select(state, action: PayloadAction<Item>) {
       state.selectedItem = action.payload ;
     },
+    clearSelection(state) {
+      state.selectedItem = null
+    }
   },
 });
 
-export const { select } = voteSlice.actions;
+export const { select, clearSelection } = voteSlice.actions;
 export default voteSlice.reducer;

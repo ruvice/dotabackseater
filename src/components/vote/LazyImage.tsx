@@ -3,7 +3,6 @@ import React, { useState, useEffect, Suspense } from 'react';
 
 // Use Webpack's `require.context` to load all images from the `assets` folder
 const images = (require as any).context('../../assets', false, /\.(png|jpe?g|svg)$/);
-console.log(images)
 // Create a map of images using the filenames as keys
 const imageMap: Record<string, string> = images.keys().reduce((acc: { [x: string]: any; }, path: string) => {
     const imageName = path.replace('./', '').replace('_lg.png', '');
@@ -27,7 +26,6 @@ const LazyImage: React.FC<LazyImageProps> = ({ itemName, height, width }) => {
       console.error(`Image not found for item: ${itemName}`);
       setImageSrc(null);
     }
-    console.log(imageMap)
   }, [itemName]);
 
   return (

@@ -2,15 +2,10 @@ import "./ItemList.css"
 import { useEffect, useState, useMemo } from 'react';
 import { Item } from '../../models/item';
 import ItemCard from './ItemCard'
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 // Define the type of the data being fetched
-type ItemDetail = {
-  name: string;
-  item_name: string;
-  cost: number;
-};
-
-
 function ItemList() {
   const [clientId, setClientId] = useState("")
   const [userId, setUserId] = useState("")
@@ -18,17 +13,7 @@ function ItemList() {
   const [channelId, setChannelId] = useState("")
   const [itemsArr, setItemsArr] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  
-  // Initial setup
-  useEffect(() => {
-    window.Twitch.ext.onAuthorized(function(auth) {
-      setUserId(auth.userId)
-      setClientId(auth.clientId)
-      setToken(auth.token)
-      setChannelId(auth.channelId)
-    })
-    console.log(window.Twitch.ext.version)
-  }, [])
+  const query = useSelector((state: RootState) => state.search.query);
 
   // Fetch data only once on component mount
   useEffect(() => {
@@ -54,13 +39,15 @@ function ItemList() {
 
   const items = useMemo(() => { 
     // Your logic for generating items
-    return itemsArr.map((item: Item) => (
-        <ItemCard item={item} />
-    ));
-  }, [itemsArr]); // Re-runs when `someDependency` changes
+    return itemsArr.map((item: Item) => {
+      if (query == "" || item.name.toLowerCase().includes(query.toLowerCase())) {
+          return <ItemCard key={item.id} item={item} />
+      }
+    });
+  }, [itemsArr, query]); // Re-runs when `someDependency` changes
 
   return (
-    <div className="flex flex-col overflow-y-auto h-[250px] mt-3 custom-scrollbar">
+    <div className="flex flex-col overflow-y-auto h-[320px] mt-3 custom-scrollbar">
         {items}
     </div>
   );

@@ -1,6 +1,6 @@
 import "./VoteSection.css"
-import { RootState, AppDispatch } from '../../../store';
-import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../store';
+import { useSelector } from 'react-redux';
 import VoteSectionValid from "./VoteSectionValid";
 import VoteSectionInvalid from "./VoteSectionInvalid";
 
