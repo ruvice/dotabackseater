@@ -20,7 +20,8 @@ module.exports = {
         'border-color': '#282828',
         'border-color-hover': '#D7D7D7',
         'dota-selection-green': '#2f6b2f',
-        'dota-selection-red': '#6B2F2F'
+        'dota-selection-red': '#6B2F2F',
+        'dota-loader-progression-color': '#EDEDED'
       },
       backgroundImage: {
         'dota-dark-tile-background': 'linear-gradient(80deg, rgb(21, 22, 22) 0%, rgb(4, 5, 5) 100%)',

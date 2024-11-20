@@ -1,0 +1,32 @@
+@keyframes shrinkAnimation {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.shrink-progress-bar {
+  animation-name: shrinkAnimation;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideElement {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.disappear-message {
+  animation: hideElement forwards;
+}

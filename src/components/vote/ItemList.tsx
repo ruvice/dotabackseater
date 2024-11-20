@@ -7,21 +7,17 @@ import { RootState } from "../../store";
 
 // Define the type of the data being fetched
 function ItemList() {
-  const [clientId, setClientId] = useState("")
-  const [userId, setUserId] = useState("")
-  const [token, setToken] = useState("")
-  const [channelId, setChannelId] = useState("")
+  const apiURL = process.env.REACT_APP_SERVER_URI
   const [itemsArr, setItemsArr] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const query = useSelector((state: RootState) => state.search.query);
-
   // Fetch data only once on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/item");
-        if (!response.ok) {
+        const response = await fetch(apiURL + "item");
+        if (!response.ok) { 
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const result: Item[] = await response.json();
@@ -35,12 +31,12 @@ function ItemList() {
     };
 
     fetchData();
-  }, []);
+  }, [apiURL]);
 
   const items = useMemo(() => { 
     // Your logic for generating items
     return itemsArr.map((item: Item) => {
-      if (query == "" || item.name.toLowerCase().includes(query.toLowerCase())) {
+      if (query === "" || item.name.toLowerCase().includes(query.toLowerCase())) {
           return <ItemCard key={item.id} item={item} />
       }
     });
@@ -48,7 +44,7 @@ function ItemList() {
 
   return (
     <div className="flex flex-col overflow-y-auto h-[320px] mt-3 custom-scrollbar">
-        {items}
+        {loading ? <p>Loading...</p> : items}
     </div>
   );
 }

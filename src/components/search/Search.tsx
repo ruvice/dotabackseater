@@ -1,5 +1,4 @@
 import "./Search.css"
-import { useState } from "react";
 import { RootState, AppDispatch } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as CloseIcon } from '../../closeicon.svg';
@@ -15,12 +14,11 @@ function Search() {
     const handleClear = () => {
         dispatch(clearQuery())
     }
-    console.log(query)
     return (
         <div className='search'>
             <textarea className="search-input" value={query} onChange={handleChange} placeholder="Search for an item" />
             <div className='close-button'>
-                {query.length != 0 ? 
+                {query.length !== 0 ? 
                     <CloseIcon className="close-icon" onClick={handleClear}/> :
                     <SearchIcon className="search-icon" />
                 }

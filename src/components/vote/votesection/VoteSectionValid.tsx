@@ -1,11 +1,9 @@
 import "./VoteSection.css"
 import { Item } from '../../../models/item';
 import LazyImage from "../LazyImage";
-import { AppDispatch, RootState } from "../../../store";
-import { useDispatch, useSelector } from "react-redux";
-import { clearQuery } from "../../search/searchSlice";
-import { clearSelection } from "../voteSlice";
-
+import { AppDispatch } from "../../../store";
+import { useDispatch } from "react-redux";
+import { castVote } from "../voteSlice";
 
 type VoteSectionValidProps = {
     item: Item
@@ -14,32 +12,8 @@ type VoteSectionValidProps = {
 function VoteSectionValid(props: VoteSectionValidProps) {
     const { item } = props;
     const dispatch = useDispatch<AppDispatch>()
-    const channelId = useSelector((state: RootState) => state.twitch.channelId);
-    const userId = useSelector((state: RootState) => state.twitch.userId)
-    const selectedItem = useSelector((state: RootState) => state.vote.selectedItem)
     const handleVote = async () => {
-        try {
-          console.log(`Voting for ${selectedItem?.item_name}`)
-          const response = await fetch(`http://localhost:3000/vote/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              "channel_id": channelId,
-              "twitch_id": userId,
-              "item_id": selectedItem?.id
-            })
-          })
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          } else {
-            dispatch(clearQuery())
-            dispatch(clearSelection())
-          }
-        } catch(err) {
-          console.log("Failed to send")
-        }
+        dispatch(castVote())
     }
     
     return (
