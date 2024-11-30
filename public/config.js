@@ -30,12 +30,20 @@ twitch.configuration.onChanged(function(){
   }
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('form');
+  form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent default form submission
+      updateConfig();
+  });
+});
+
 async function updateConfig(){
   console.log(voteThreshold)
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
   const currentVoteThreshold = document.getElementById('currentVoteThreshold')
   currentVoteThreshold.textContent = voteThreshold.value
-  const url = "http://localhost:3000/config/" + channelID; // Example API endpoint
+  const url = "https://dotabackseater.ruvice.com/config/" + channelID; // Example API endpoint
   try {
     // Make the HTTPS request using fetch
     const response = await fetch(url, {
@@ -62,10 +70,3 @@ document.getElementById('voteThreshold').addEventListener('input', function (e) 
       this.value = max;
   }
 });
-
-// Function to save the streamer's WYR options  
-$(function(){
-  $("#form").submit(function(e){
-    e.preventDefault()
-  })  
-})
