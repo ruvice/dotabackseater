@@ -8,6 +8,7 @@ import { RootState } from "../../store";
 // Define the type of the data being fetched
 function ItemList() {
   const apiURL = process.env.REACT_APP_SERVER_URI
+  // const apiURL = "http://localhost:3000/"
   const [itemsArr, setItemsArr] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const query = useSelector((state: RootState) => state.search.query);

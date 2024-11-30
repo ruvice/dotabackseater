@@ -1,50 +1,53 @@
-var token, userId;
+var token, userId, channelID, theme;
 var options = []
 
 // so we don't have to write this out everytime 
 const twitch = window.Twitch.ext;
-
-// onContext callback called when context of an extension is fired 
-twitch.onContext((context) => {
-  //console.log(context);
-});
-
-
 // onAuthorized callback called each time JWT is fired
 twitch.onAuthorized((auth) => {
   // save our credentials
   token = auth.token; //JWT passed to backend for authentication 
   userId = auth.userId; //opaque userID 
+  channelID = auth.channelId;
 });
-
 
 // when the config changes, save the new changes! 
 twitch.configuration.onChanged(function(){
-  console.log(twitch.configuration.broadcaster)
-  console.log("in onChanged")
   if(twitch.configuration.broadcaster){
-    console.log("config exists")
     try{
       var voteThreshold = JSON.parse(twitch.configuration.broadcaster.content)
-      if(typeof config === "string"){
+      if(typeof voteThreshold === "string"){
         const voteThresholdInput = document.getElementById('voteThreshold')
-        voteThresholdInput.value = voteThreshold
-        //console.log(options)
+        voteThresholdInput.value = Number(voteThreshold)
+        const currentVoteThreshold = document.getElementById('currentVoteThreshold')
+        currentVoteThreshold.textContent = voteThreshold
       }else{
         console.log('invalid config')
       }
     }catch(e){
-      console.log('invalid config')
+      console.log('invalid config', e)
     }
   }
 })
 
-function updateConfig(){
-  console.log("updating")
+async function updateConfig(){
+  console.log(voteThreshold)
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
-  console.log("has it been set?")
-  console.log(twitch.configuration.broadcaster.content)
+  const currentVoteThreshold = document.getElementById('currentVoteThreshold')
+  currentVoteThreshold.textContent = voteThreshold.value
+  const url = "http://localhost:3000/config/" + channelID; // Example API endpoint
+  try {
+    // Make the HTTPS request using fetch
+    const response = await fetch(url, {
+      method: "GET", // HTTP method
+    });
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 document.getElementById('voteThreshold').addEventListener('input', function (e) {
@@ -63,8 +66,6 @@ document.getElementById('voteThreshold').addEventListener('input', function (e) 
 // Function to save the streamer's WYR options  
 $(function(){
   $("#form").submit(function(e){
-    const voteThresholdInput = document.getElementById('voteThreshold')
-    voteThreshold = voteThresholdInput.value
     e.preventDefault()
   })  
 })

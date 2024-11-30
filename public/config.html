@@ -11,8 +11,12 @@
   <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
     <!-- basic form that allows streamer to select which WYR options --> 
     <form id = "form">
+      <div style="display: flex;">
+        <h1>Current vote threshold: </h1>
+        <h1 id="currentVoteThreshold" style="padding-left: 0.5rem;"></h1>
+      </div>
       <div id = "form-div" class="form-div">
-            <text id="helper-hint">This value is the number of votes that your viewers have to submit before the bot sends a message in chat! Just type whatever you want</text>
+            <text id="helper-hint">Set minimum votes required before results are announced, between 1 - 9999</text>
             <input type="number" min="0" max="9999" step="1" id="voteThreshold" name="voteThreshold" placeholder="Enter vote threshold, max 9999">
       </div>
       </fieldset> 

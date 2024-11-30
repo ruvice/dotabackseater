@@ -3,18 +3,11 @@ body {
   margin: 0;
   padding: 20px;
 }
-/* Light mode */
-@media (prefers-color-scheme: light) {
-  body {
-      color: #000000;
-  }
-}
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  body {
-      color: #ffffff;
-  }
+/* Default light mode styles */
+body {
+  color: white;
+  background-image: linear-gradient(80deg, #252728, #101415);
 }
 
 .form-div {
