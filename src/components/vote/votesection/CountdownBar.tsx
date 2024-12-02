@@ -4,7 +4,7 @@ import React from 'react';
 import { RootState } from '../../../store';
 import { useEffect, useState } from 'react';
 
-const CountdownBar: React.FC = () => {
+function CountdownBar() {
   const totalDuration = 15
   const countdown = useSelector((state: RootState) => state.vote.countdown);
   const [timeLeft, setTimeLeft] = useState(0)

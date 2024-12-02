@@ -3,9 +3,22 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-dota-tab-background rounded-lg min-h-12;
+    @apply bg-dota-tab-background rounded-lg min-h-12 w-2;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-dota-med-tile-background;
+    @apply bg-dota-scrollbar-hover;
+}
+
+.item-list-container {
+    display: grid;
+    gap: 1rem; /* Add spacing between cards */
+    max-height: 400px; /* Set a height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 1rem; /* Add padding inside the container */
+    background-color: #1a1a1a; /* Optional background for styling */
+    border: 1px solid #333; /* Optional border for aesthetics */
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the container's total width/height */
+    padding-right: 1rem; /* Add padding specifically for the scrollbar */
 }

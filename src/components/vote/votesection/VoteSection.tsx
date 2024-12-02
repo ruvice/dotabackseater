@@ -7,7 +7,6 @@ import CountdownBar from "./CountdownBar";
 
 function VoteSection() {
     const selectedItem = useSelector((state: RootState) => state.vote.selectedItem);
-
     return (
         <div className='flex flex-col'>
             <div className="w-full">

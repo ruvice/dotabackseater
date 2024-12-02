@@ -1,6 +1,27 @@
 .vote-sectionValid {
     @apply bg-dota-selection-green h-[50px] mt-4 rounded border-2 border-border-color cursor-pointer hover:border-dota-text-white select-none
 }
+.vote-sectionCooldown {
+    @apply bg-dota-selection-green h-[50px] mt-4 rounded border-2 border-border-color select-none cursor-not-allowed
+}
 .vote-sectionInvalid {
     @apply bg-dota-selection-red h-[50px] mt-4 rounded border-2 border-border-color select-none
+}
+
+.tinted-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.6); /* Tint color */
+    pointer-events: none; /* Makes the overlay non-interactive */
 }

@@ -25,7 +25,7 @@ twitch.configuration.onChanged(function(){
         console.log('invalid config')
       }
     }catch(e){
-      console.log('invalid config', e)
+      console.log('invalid config err')
     }
   }
 })
@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function updateConfig(){
-  console.log(voteThreshold)
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
   const currentVoteThreshold = document.getElementById('currentVoteThreshold')
   currentVoteThreshold.textContent = voteThreshold.value
@@ -54,7 +53,7 @@ async function updateConfig(){
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
   } catch (error) {
-    console.log(error)
+    console.log("Failed to update streamer config")
   }
 }
 

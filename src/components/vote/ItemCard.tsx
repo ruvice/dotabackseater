@@ -19,8 +19,8 @@ function ItemCard(props: ItemCardProps) {
     }
     return ( item ?
         <button className="btn-voteItem group" key={item.id} onClick={() => handleClick(item)}>
-            <div className="group flex flex-row pl-4">
-                <LazyImage itemName={item.item_name} height={16} width={21}/>
+            <div className="div-voteItem group flex flex-row pl-4 content-center">
+                <LazyImage itemName={item.item_name} height={32} width={42}/>
                 <p className="text-dota-text-white text-xs pl-2">{item.name}</p>
             </div>
         </button> : <div>Unknown item</div>

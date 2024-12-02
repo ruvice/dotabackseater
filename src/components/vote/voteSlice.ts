@@ -20,7 +20,6 @@ export const castVote = createAsyncThunk('vote', async (_, { getState, rejectWit
   // const apiURL = "http://localhost:3000/"
   if (Date.now() >= countdown) {
     try {
-      console.log("sending")
       const response = await fetch(apiURL + `vote/`, {
         method: 'POST',
         headers: {
@@ -34,20 +33,16 @@ export const castVote = createAsyncThunk('vote', async (_, { getState, rejectWit
       })
       if (response.status === 429) {
         const retryAfter = Number(response.headers.get('Retry-After'))
-        console.log("setting retry after:", retryAfter)
         voteSlice.actions.setCountdown(Date.now()+retryAfter)
         return rejectWithValue({ retryAfter: retryAfter })
-        throw new Error('Too many requests');
       }
       if (!response.ok) {
         throw new Error('Failed to fetch votes');
       }
-      console.log("sent")
     } catch(err) {
-      console.log("Failed to send", err)
+      throw new Error('Failed to send')
     }
   } else {
-    console.log("invalid send")
     throw new Error('Countdown not over')
   }
 });

@@ -22,10 +22,9 @@ function ItemList() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const result: Item[] = await response.json();
-        console.log(result)
         setItemsArr(result);
       } catch (err: any) {
-        console.log(err);
+        console.log("Error fetching items");
       } finally {
         setLoading(false);
       }
@@ -44,7 +43,7 @@ function ItemList() {
   }, [itemsArr, query]); // Re-runs when `someDependency` changes
 
   return (
-    <div className="flex flex-col overflow-y-auto h-[320px] mt-3 custom-scrollbar">
+    <div className="item-list-container flex flex-col overflow-y-auto h-[320px] mt-3 custom-scrollbar">
         {loading ? <p>Loading...</p> : items}
     </div>
   );
