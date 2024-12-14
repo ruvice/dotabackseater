@@ -46,7 +46,7 @@ async function updateConfig(){
   try {
     // Make the HTTPS request using fetch
     const response = await fetch(url, {
-      method: "GET", // HTTP method
+      method: "POST", // HTTP method
     });
 
     if (!response.ok) {
