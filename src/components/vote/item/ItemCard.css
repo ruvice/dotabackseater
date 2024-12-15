@@ -3,16 +3,15 @@
     display: flex;
     background-color: #282828; /* Card background */
     color: #fff; /* Text color */
-    padding: 1rem; /* Inner padding */
+    padding: 8px; /* Inner padding */
     border: 1px solid #444; /* Optional border for card */
-    border-radius: 6px; /* Optional rounded corners */
+    border-radius: 4px; /* Optional rounded corners */
     text-align: left; /* Center text inside card */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
 }
 
 .div-voteItem {
     display: flex;
-    height: 32px;
     align-items: center;
 }
 

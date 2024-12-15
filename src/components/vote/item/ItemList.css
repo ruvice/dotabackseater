@@ -11,11 +11,10 @@
 }
 
 .item-list-container {
-    display: grid;
-    gap: 1rem; /* Add spacing between cards */
+    gap: 8px; /* Add spacing between cards */
     max-height: 400px; /* Set a height for scrolling */
     overflow-y: auto; /* Enable vertical scrolling */
-    padding: 1rem; /* Add padding inside the container */
+    padding: 16px; /* Add padding inside the container */
     background-color: #1a1a1a; /* Optional background for styling */
     border: 1px solid #333; /* Optional border for aesthetics */
     border-radius: 8px; /* Rounded corners */

@@ -1,8 +1,8 @@
 import './ItemCard.css'
-import { Item } from '../../models/item';
+import { Item } from '../../../models/item';
 import LazyImage from "./LazyImage";
-import { AppDispatch } from '../../store';
-import { select } from './voteSlice';
+import { AppDispatch } from '../../../store';
+import { select } from '../voteSlice';
 import { useDispatch } from 'react-redux';
 
 type ItemCardProps = {

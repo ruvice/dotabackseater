@@ -1,9 +1,9 @@
 .search {
-    @apply h-[48px] bg-dota-tab-background mt-2 flex flex-row justify-end align-middle rounded-sm border-2 border-border-color focus-within:border-transparent focus-within:shadow-[0_2px_0_0_white]
+    @apply h-[38px] p-2 bg-dota-tab-background mt-2 flex flex-row justify-end align-middle rounded-sm border-2 border-border-color focus-within:border-transparent focus-within:shadow-[0_2px_0_0_white]
 }
 
 .search-input {
-    @apply bg-transparent h-full w-full leading-tight text-dota-text-white p-2 resize-none text-xl overflow-x-auto whitespace-nowrap overflow-y-hidden overflow-x-hidden focus:outline-none
+    @apply bg-transparent h-full w-full leading-tight text-dota-text-white resize-none text-xs placeholder:text-xs overflow-x-hidden whitespace-nowrap overflow-y-hidden focus:outline-none
 }
 
 .close-button {

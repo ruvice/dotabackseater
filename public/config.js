@@ -44,7 +44,6 @@ async function updateConfig(){
   currentVoteThreshold.textContent = voteThreshold.value
   const url = "https://dotabackseater.ruvice.com/config/" + channelID; // Example API endpoint
   try {
-    // Make the HTTPS request using fetch
     const response = await fetch(url, {
       method: "POST", // HTTP method
     });

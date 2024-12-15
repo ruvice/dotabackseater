@@ -15,9 +15,10 @@ export const castVote = createAsyncThunk('vote', async (_, { getState, rejectWit
   const countdown = state.vote.countdown;
   const selectedItem = state.vote.selectedItem;
   
-  const apiURL = process.env.REACT_APP_SERVER_URI
-  
-  // const apiURL = "http://localhost:3000/"
+  const apiURL =
+    process.env.NODE_ENV === 'production'
+      ? process.env.REACT_APP_SERVER_URI
+      : process.env.REACT_APP_API_DEV;
   if (Date.now() >= countdown) {
     try {
       const response = await fetch(apiURL + `vote/`, {
