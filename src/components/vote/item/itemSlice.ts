@@ -13,8 +13,6 @@ export const getItems = createAsyncThunk('getItems', async (_, { getState, rejec
     process.env.NODE_ENV === 'production'
       ? process.env.REACT_APP_SERVER_URI
       : process.env.REACT_APP_API_DEV;
-  console.log(process.env)
-  console.log(apiURL)
   const response = await fetch(apiURL + "item");
   if (!response.ok) { 
     throw new Error(`HTTP error! Status: ${response.status}`);

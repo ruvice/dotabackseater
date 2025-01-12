@@ -1,5 +1,5 @@
 .search {
-    @apply h-[38px] p-2 bg-dota-tab-background mt-2 flex flex-row justify-end align-middle rounded-sm border-2 border-border-color focus-within:border-transparent focus-within:shadow-[0_2px_0_0_white]
+    @apply h-[38px] p-2 bg-dota-tab-background mt-2 mx-2 flex flex-row justify-end align-middle rounded-sm border-2 border-border-color focus-within:border-transparent focus-within:shadow-[0_2px_0_0_white]
 }
 
 .search-input {

@@ -1,0 +1,10 @@
+@tailwind components;
+
+@layer components {
+    .chat-suggestion-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 48px;
+    }
+}

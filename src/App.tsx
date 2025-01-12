@@ -10,6 +10,8 @@ import { StreamerConfig } from './models/streamerConfig';
 import { getItems } from './components/vote/item/itemSlice';
 import Panel from './components/panel/Panel';
 import { getExtensionVoteStatus } from './events/eventSlice';
+import ItemSection from './components/itemSection/ItemSection';
+import Header from './components/panel/Header';
 
 // Define the type of the data being fetched
 function App() {
@@ -49,9 +51,9 @@ function App() {
 
   return (
     <div className="bg-dota-dark-tile-background max-h-[496px] h-[496px] w-[318px] max-w-[318px] p-3 overflow-hidden relative">
+        <Header />
         <Panel />
-        <Search />
-        <ItemList />
+        <ItemSection />
         <VoteSection />
         <Tooltip />
     </div>

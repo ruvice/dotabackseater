@@ -1,9 +1,9 @@
-import "./ItemList.css"
 import { useMemo } from 'react';
-import { Item } from '../../../models/item';
-import ItemCard from './ItemCard'
 import { useSelector } from "react-redux";
+import { Item } from '../../../models/item';
 import { RootState } from "../../../store";
+import ItemCard from './ItemCard';
+import "./ItemList.css";
 
 // Define the type of the data being fetched
 function ItemList() {
@@ -20,7 +20,7 @@ function ItemList() {
   }, [itemsArr, query]); // Re-runs when `someDependency` changes
 
   return (
-    <div className="item-list-container flex flex-col overflow-y-auto h-[200px] mt-3 custom-scrollbar">
+    <div className="item-list-container h-[212px] custom-scrollbar">
         {loading ? <p>Loading...</p> : items}
     </div>
   );

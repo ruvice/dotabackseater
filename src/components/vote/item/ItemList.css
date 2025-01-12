@@ -1,3 +1,4 @@
+@tailwind components;
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
@@ -10,14 +11,19 @@
     @apply bg-dota-scrollbar-hover;
 }
 
-.item-list-container {
-    gap: 8px; /* Add spacing between cards */
-    max-height: 400px; /* Set a height for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 16px; /* Add padding inside the container */
-    background-color: #1a1a1a; /* Optional background for styling */
-    border: 1px solid #333; /* Optional border for aesthetics */
-    border-radius: 8px; /* Rounded corners */
-    box-sizing: border-box; /* Include padding in the container's total width/height */
-    padding-right: 1rem; /* Add padding specifically for the scrollbar */
+@layer components {
+    .item-list-container {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        gap: 8px; /* Add spacing between cards */
+        max-height: 400px; /* Set a height for scrolling */
+        overflow-y: auto; /* Enable vertical scrolling */
+        padding-left: 16px;
+        padding-right: 8px;
+        box-sizing: border-box; /* Include padding in the container's total width/height */
+        margin-top: 16px;
+        margin-bottom: 8px;
+        margin-right: 8px;
+    }
 }

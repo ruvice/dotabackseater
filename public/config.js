@@ -42,6 +42,7 @@ async function updateConfig(){
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
   const currentVoteThreshold = document.getElementById('currentVoteThreshold')
   currentVoteThreshold.textContent = voteThreshold.value
+//   const url = "http://localhost:3000/config/" + channelID; // Example API endpoint
   const url = "https://dotabackseater.ruvice.com/config/" + channelID; // Example API endpoint
   try {
     const response = await fetch(url, {

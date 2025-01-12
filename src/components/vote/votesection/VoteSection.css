@@ -1,11 +1,11 @@
 .vote-sectionValid {
-    @apply bg-dota-selection-green h-[50px] mt-4 rounded border-2 border-border-color cursor-pointer hover:border-dota-text-white select-none
+    @apply bg-dota-selection-green h-[50px] rounded border-2 border-border-color cursor-pointer hover:border-dota-text-white select-none
 }
 .vote-sectionCooldown {
-    @apply bg-dota-selection-green h-[50px] mt-4 rounded border-2 border-border-color select-none cursor-not-allowed
+    @apply bg-dota-selection-green h-[50px] rounded border-2 border-border-color select-none cursor-not-allowed
 }
 .vote-sectionInvalid {
-    @apply bg-dota-selection-red h-[50px] mt-4 rounded border-2 border-border-color select-none
+    @apply bg-dota-selection-red h-[50px] rounded border-2 border-border-color select-none
 }
 
 .tinted-container {

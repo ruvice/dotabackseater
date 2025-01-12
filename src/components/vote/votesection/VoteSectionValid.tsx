@@ -33,24 +33,20 @@ function VoteSectionValid(props: VoteSectionValidProps) {
     }, [countdown]);
     return (
         <>
-        {isCooldown ? 
-            <div className="tinted-container">
-                <div className="overlay"></div>
-                <div className="vote-sectionCooldown flex flex-row p-2 align-middle" onClick={handleVote}>
-                    <div className="h-[21] align-center">
+            <div className={isCooldown ? "tinted-container" : ""}>
+                {isCooldown && <div className="overlay"></div>}
+                <div
+                    className={`${
+                    isCooldown ? "vote-sectionCooldown" : "vote-sectionValid"
+                    } flex flex-row p-2 align-middle`}
+                    onClick={handleVote}
+                >
+                    <div className="h-[21] align-center ml-4">
                         <LazyImage itemName={item.item_name} height={21} width={28.3} />
                     </div>
                     <p className="text-dota-text-white pl-3 font-semibold self-center">Vote {item.name}</p>
                 </div>
             </div>
-            :
-            <div className="vote-sectionValid flex flex-row p-2 align-middle" onClick={handleVote}>
-                <div className="h-[21] align-center">
-                    <LazyImage itemName={item.item_name} height={21} width={28.3} />
-                </div>
-                <p className="text-dota-text-white pl-3 font-semibold self-center">Vote {item.name}</p>
-            </div>
-        }
         </>
     );
 }
