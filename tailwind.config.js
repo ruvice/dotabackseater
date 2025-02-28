@@ -26,7 +26,7 @@ module.exports = {
         'dota-scrollbar-hover': '#444444',
         'dota-panel-background': '#161618',
         'dota-panel-item-box': '#2B2B2D',
-        'dota-panel-item-box-inactive': '#4A4A4D'
+        'dota-panel-item-box-active': '#4A4A4D'
       },
       backgroundImage: {
         'dota-dark-tile-background': 'linear-gradient(80deg, rgb(21, 22, 22) 0%, rgb(4, 5, 5) 100%)',

@@ -10,5 +10,6 @@ export interface Item {
 export interface Hero {
     id:  string;
     name: string;
+    hero_name: string;
     type: "hero";
 }

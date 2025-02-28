@@ -55,10 +55,8 @@ const voteSlice = createSlice({
   reducers: {
     select(state, action: PayloadAction<Item | Hero>) {
         if (action.payload.type === "item") {
-            console.log('selected item')
             state.selectedItem = action.payload;
         } else {
-            console.log('selected hero')
             state.selectedHero = action.payload;
         }
     },

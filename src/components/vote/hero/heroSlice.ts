@@ -13,8 +13,7 @@ export const getHeroes = createAsyncThunk('getHeroes', async (_, { getState, rej
         process.env.NODE_ENV === 'production'
         ? process.env.REACT_APP_SERVER_URI
         : process.env.REACT_APP_API_DEV;
-    // TODO: Rename this
-    const response = await fetch(apiURL + "item");
+    const response = await fetch(apiURL + "hero");
     if (!response.ok) { 
         throw new Error(`HTTP error! Status: ${response.status}`);
     }

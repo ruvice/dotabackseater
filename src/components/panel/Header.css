@@ -8,4 +8,8 @@
         height: 48px;
         justify-content: space-evenly;
     }
+    .header_tab {
+        cursor: pointer;
+        box-sizing: border-box;
+    }
 }

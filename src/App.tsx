@@ -10,7 +10,7 @@ import Panel from './components/panel/Panel';
 import { getExtensionVoteStatus } from './events/eventSlice';
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
-import { AppMode } from './appSlice';
+import { getHeroes } from './components/vote/hero/heroSlice';
 
 // Define the type of the data being fetched
 function App() {
@@ -28,7 +28,6 @@ function App() {
             process.env.NODE_ENV === 'production'
                 ? process.env.REACT_APP_SERVER_URI
                 : process.env.REACT_APP_API_DEV;
-            console.log(apiURL);
             const fetchData = async () => {
                 try {
                     const response = await fetch(apiURL + "config/" + auth.channelId);
@@ -44,6 +43,7 @@ function App() {
             };
             fetchData();
             dispatch(getItems())
+            dispatch(getHeroes())
             dispatch(getExtensionVoteStatus())
     })
     return () => {
