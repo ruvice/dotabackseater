@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../models/item';
+import { Hero, Item } from '../../models/models';
 import { VoteState } from './voteTypes';
 import { RootState } from '../../store';
 
 const initialState: VoteState = {
   selectedItem: null,
+  selectedHero: null,
   countdown: Date.now()
 }
 
@@ -52,11 +53,14 @@ const voteSlice = createSlice({
   name: 'vote',
   initialState,
   reducers: {
-    select(state, action: PayloadAction<Item>) {
-      state.selectedItem = action.payload ;
-    },
-    clearSelection(state) {
-      state.selectedItem = null
+    select(state, action: PayloadAction<Item | Hero>) {
+        if (action.payload.type === "item") {
+            console.log('selected item')
+            state.selectedItem = action.payload;
+        } else {
+            console.log('selected hero')
+            state.selectedHero = action.payload;
+        }
     },
     setCountdown(state, action: PayloadAction<number>) {
       state.countdown = action.payload ;
@@ -78,5 +82,5 @@ const voteSlice = createSlice({
   },
 });
 
-export const { select, clearSelection, setCountdown } = voteSlice.actions;
+export const { select, setCountdown } = voteSlice.actions;
 export default voteSlice.reducer;

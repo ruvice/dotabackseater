@@ -1,6 +1,6 @@
 import "./VoteSection.css"
-import { Item } from '../../../models/item';
-import LazyImage from "../item/LazyImage";
+import { Item } from '../../../models/models';
+import LazyImage from "../voteMenu/LazyImage";
 import { AppDispatch, RootState } from "../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { castVote } from "../voteSlice";

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FetchItemResult, ItemMap, ItemState } from './itemTypes';
-import { Item } from '../../../models/item';
+import { Item } from '../../../models/models';
 
 const initialState: ItemState = {
   loading: true,
@@ -17,7 +17,11 @@ export const getItems = createAsyncThunk('getItems', async (_, { getState, rejec
   if (!response.ok) { 
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
-  const itemsArr: Item[] = await response.json();
+  const res: Item[] = await response.json();
+  const itemsArr: Item[] = res.map(item => ({
+    ...item,
+    type: "item",
+  }));
   const items = getItemsFromArr(itemsArr)
   const result: FetchItemResult = {
     items: items,

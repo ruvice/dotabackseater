@@ -1,15 +1,15 @@
-import "./ItemSection.css"
+import "./VoteSelectionSection.css"
 import { useSelector } from 'react-redux';
-import ItemList from "../vote/item/ItemList";
+import VoteSelectionList from "../vote/voteMenu/VoteSelectionList";
 import Search from "../search/Search";
 
-function ItemSection() {
+function VoteSelectionSection() {
     return (
         <div className='item-section-container flex flex-col mt-2'>
             <Search />
-            <ItemList />
+            <VoteSelectionList />
         </div>
     );
 }
 
-export default ItemSection;
+export default VoteSelectionSection;

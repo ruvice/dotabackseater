@@ -4,6 +4,8 @@ import searchReducer from './components/search/searchSlice'
 import twitchReducer from './twitch/twitchSlice'
 import itemReducer from './components/vote/item/itemSlice'
 import eventReducer from './events/eventSlice'
+import appReducer from './appSlice'
+import heroReducer from './components/vote/hero/heroSlice'
 import { sseMiddleware } from './events/eventsMiddleware';
 const store = configureStore({
   reducer: {
@@ -11,7 +13,9 @@ const store = configureStore({
     search: searchReducer,
     twitch: twitchReducer,
     item: itemReducer,
-    event: eventReducer
+    hero: heroReducer,
+    event: eventReducer,
+    app: appReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sseMiddleware),

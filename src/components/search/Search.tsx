@@ -17,7 +17,7 @@ function Search() {
     return (
         <div className='search'>
             <SearchIcon className="search-icon" />
-            <textarea className="search-input ml-2" value={query} onChange={handleChange} placeholder="Search for an item" />
+            <textarea className="search-input ml-2" value={query} onChange={handleChange} placeholder="Search for an item" spellCheck={false}/>
             <div className='close-button'>
                 {query.length !== 0 && <CloseIcon className="close-icon" onClick={handleClear}/>}
             </div>

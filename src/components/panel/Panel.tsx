@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import ItemCard from "../vote/item/ItemCard";
-import { Item } from "../../models/item";
-import LazyImage from "../vote/item/LazyImage";
+import ItemCard from "../vote/voteMenu/VoteSelectionCard";
+import { Item } from "../../models/models";
+import LazyImage from "../vote/voteMenu/LazyImage";
 import { useEffect, useRef, useState } from "react";
 import ChatSuggestion from "./ChatSuggestion";
 
