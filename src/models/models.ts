@@ -20,3 +20,5 @@ export interface VoteModel {
     image_name: string;
     voteModel: Item | Hero;
 }
+
+export type HeroVoteMap = Record<string, number> | undefined

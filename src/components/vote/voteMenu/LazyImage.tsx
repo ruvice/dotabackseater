@@ -28,7 +28,6 @@ const LazyImage: React.FC<LazyImageProps> = ({ imageName, height, width }) => {
             setImageSrc(null);
         }
     }, [imageName]);
-    console.log(width, height)
     return (
         <>
             {(imageSrc && !loading) ? <img style={{ height: height, width: "auto" }} src={imageSrc} alt={`Image of ${imageName}`} className='inline'/> : <div style={{width: width, height: height}}/>}

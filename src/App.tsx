@@ -7,7 +7,7 @@ import { updateChannelId, updateClientId, updateToken, updateUserId, updateStrea
 import { StreamerConfig } from './models/streamerConfig';
 import { getItems } from './components/vote/item/itemSlice';
 import Panel from './components/panel/Panel';
-import { getExtensionVoteStatus } from './events/eventSlice';
+import { getExtensionHeroVoteStatus, getExtensionItemVoteStatus } from './events/eventSlice';
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
 import { getHeroes } from './components/vote/hero/heroSlice';
@@ -50,7 +50,8 @@ function App() {
             fetchData();
             dispatch(getItems())
             dispatch(getHeroes())
-            dispatch(getExtensionVoteStatus())
+            dispatch(getExtensionItemVoteStatus())
+            dispatch(getExtensionHeroVoteStatus())
     })
     return () => {
       dispatch({ type: 'events/stopListening' });

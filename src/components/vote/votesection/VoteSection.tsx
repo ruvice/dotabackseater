@@ -14,7 +14,24 @@ function VoteSection() {
     const selectedItem = useSelector((state: RootState) => state.vote.selectedItem);
     const selectedHero = useSelector((state: RootState) => state.vote.selectedHero);
     const curMode = useSelector((state: RootState) => state.app.mode);
-    
+    const hasActiveHeroVoteSession = useSelector((state: RootState) => state.vote.hasActiveHeroVoteSession);
+    const hasVoted = useSelector((state: RootState) => state.vote.hasVoted);
+
+    const getVoteSectionButton = () => {
+        if (curMode === AppMode.Hero) {
+          return hasActiveHeroVoteSession && voteSelection && !hasVoted
+            ? <VoteSectionValidButton voteSelection={voteSelection} />
+            : <VoteSectionInvalidButton />;
+        }
+      
+        if (curMode === AppMode.Item) {
+          return voteSelection
+            ? <VoteSectionValidButton voteSelection={voteSelection} />
+            : <VoteSectionInvalidButton />;
+        }
+      
+        return <VoteSectionInvalidButton />;
+    };
     useEffect(() => {
         if (curMode === AppMode.Hero) {
             if (selectedHero) {
@@ -29,11 +46,13 @@ function VoteSection() {
                 setVoteSelection(undefined)
             }
         }
-    }, [curMode, selectedHero, selectedItem])
+    }, [curMode, selectedHero, selectedItem, hasActiveHeroVoteSession])
+    console.log("hasActiveHeroVoteSession", hasActiveHeroVoteSession)
+    console.log("hasVoted", hasVoted)
     return (
         <div className='flex flex-col'>
             <div className="w-full">
-                { voteSelection ? <VoteSectionValidButton voteSelection={voteSelection} /> : <VoteSectionInvalidButton /> }
+                {getVoteSectionButton()}
             </div>
             <CountdownBar />
         </div>

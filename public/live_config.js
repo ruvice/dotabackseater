@@ -6,29 +6,11 @@ const twitch = window.Twitch.ext;
 // onAuthorized callback called each time JWT is fired
 twitch.onAuthorized((auth) => {
   // save our credentials
+  console.log("got auth in live_config")
   token = auth.token; //JWT passed to backend for authentication 
   userId = auth.userId; //opaque userID 
   channelID = auth.channelId;
 });
-
-// when the config changes, save the new changes! 
-twitch.configuration.onChanged(function(){
-  if(twitch.configuration.broadcaster){
-    try{
-      var voteThreshold = JSON.parse(twitch.configuration.broadcaster.content)
-      if(typeof voteThreshold === "string"){
-        const voteThresholdInput = document.getElementById('voteThreshold')
-        voteThresholdInput.value = Number(voteThreshold)
-        const currentVoteThreshold = document.getElementById('currentVoteThreshold')
-        currentVoteThreshold.textContent = voteThreshold
-      } else {
-        console.log('invalid config')
-      }
-    }catch(e){
-      console.log('invalid config err')
-    }
-  }
-})
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form');
@@ -38,15 +20,55 @@ document.addEventListener('DOMContentLoaded', () => {
         if (submitterId === 'start-button') {
             console.log('starting vote');
             startVote();
-        } else if (submitterId === 'stop-button') {
+        } else {
             console.log('stopping vote');
             stopVote();
-        } else {
-            console.log('reseting vote');
-            resetVote();
-        }
+        } 
   });
 });
+
+async function startVote() {
+    const voteDuration = document.getElementById('voteDuration').value
+    const url = "http://localhost:3000/vote/hero/start";
+    // const url = "https://dotabackseater.ruvice.com/vote/hero/start";
+    try {
+        const response = await fetch(url, {
+            method: "POST", // HTTP method,
+            headers: {
+                "channel-id": 40825038
+            },
+            body: JSON.stringify({
+                'duration': voteDuration
+            })
+        });
+  
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.log("Failed to start hero vote")
+    }
+}
+
+async function stopVote() {
+    const url = "http://localhost:3000/vote/hero/stop";
+    // const url = "https://dotabackseater.ruvice.com/vote/hero/stop";
+    try {
+        const response = await fetch(url, {
+            method: "POST", // HTTP method,
+            headers: {
+                "channel-id": 40825038
+            },
+        });
+  
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.log("Failed to start hero vote")
+    }
+}
+
 
 async function updateConfig(){
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))

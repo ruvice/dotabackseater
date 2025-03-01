@@ -3,7 +3,7 @@
 
 <head>
   <title>Configuration Page </title>
-  <link rel="stylesheet" href="config.css">
+  <link rel="stylesheet" href="live_config.css">
 </head>
 <body>
   <div class="extension"> 
@@ -16,12 +16,11 @@
       </div>
       <div id = "form-div" class="form-div">
             <text id="helper-hint">Specify how long users have to submit their votes</text>
-            <input type="number" min="0" max="120" step="1" id="voteThreshold" name="voteDuration" placeholder="Max 120s">
+            <input type="number" min="0" max="120" step="1" id="voteDuration" name="voteDuration" placeholder="Max 120s">
       </div>
       <div id="form-submit" class="form-submit">
         <input id="start-button" type="submit" value="Start Vote">
         <input id="stop-button" type="submit" value="Stop Vote">
-        <input id="reset-button" type="submit" value="Reset">
       </div>
     </form>
   </div>

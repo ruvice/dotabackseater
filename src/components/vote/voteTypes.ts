@@ -4,5 +4,7 @@ export interface VoteState {
     selectedItem: Item | null
     selectedHero: Hero | null
     countdown: number
+    hasActiveHeroVoteSession: boolean
+    hasVoted: boolean
 }
   

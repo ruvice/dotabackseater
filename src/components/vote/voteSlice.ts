@@ -6,7 +6,9 @@ import { RootState } from '../../store';
 const initialState: VoteState = {
   selectedItem: null,
   selectedHero: null,
-  countdown: Date.now()
+  countdown: Date.now(),
+  hasActiveHeroVoteSession: false,
+  hasVoted: false
 }
 
 export const castItemVote = createAsyncThunk('voteItem', async (_, { getState, rejectWithValue }) => {
@@ -22,6 +24,7 @@ export const castItemVote = createAsyncThunk('voteItem', async (_, { getState, r
         : process.env.REACT_APP_API_DEV;
     if (Date.now() >= countdown) {
         try {
+            console.log("voting item")
             const response = await fetch(apiURL + `vote/`, {
                 method: 'POST',
                 headers: {
@@ -77,7 +80,6 @@ export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, r
             })
             if (response.status === 429) {
                 const retryAfter = Number(response.headers.get('Retry-After'))
-                voteSlice.actions.setCountdown(Date.now()+retryAfter)
                 return rejectWithValue({ retryAfter: retryAfter })
             }
             if (!response.ok) {
@@ -105,6 +107,12 @@ const voteSlice = createSlice({
     setCountdown(state, action: PayloadAction<number>) {
       state.countdown = action.payload ;
     },
+    setHasActiveVoteSession: (state, action: PayloadAction<boolean>) => {
+        state.hasActiveHeroVoteSession = action.payload;
+    },
+    setHasVoted: (state, action: PayloadAction<boolean>) => {
+        state.hasVoted = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -121,10 +129,10 @@ const voteSlice = createSlice({
       })
       .addCase(castHeroVote.fulfilled, (state, action: PayloadAction<any>) => {
         state.selectedHero = null; // Optionally clear the selected item
-        state.countdown = Date.now() + 15 * 1000; // Reset the countdown or update it as needed
+        state.hasVoted = true
       })
   },
 });
 
-export const { select, setCountdown } = voteSlice.actions;
+export const { select, setCountdown, setHasActiveVoteSession, setHasVoted } = voteSlice.actions;
 export default voteSlice.reducer;
