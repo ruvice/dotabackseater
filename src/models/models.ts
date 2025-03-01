@@ -13,3 +13,10 @@ export interface Hero {
     hero_name: string;
     type: "hero";
 }
+
+export interface VoteModel {
+    id: string;
+    display_name: string;
+    image_name: string;
+    voteModel: Item | Hero;
+}

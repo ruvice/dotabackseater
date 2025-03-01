@@ -2,18 +2,10 @@ import { useMemo } from 'react';
 import { useSelector } from "react-redux";
 import { Hero, Item } from '../../../models/models';
 import { RootState } from "../../../store";
-import VoteSelectionCard, { VoteSelectionCardProps } from './VoteSelectionCard';
-import "./VoteSelectionList.css";
+import VoteSelectionCard from './VoteSelectionCard';
 import { AppMode } from '../../../appSlice';
-  
-export const mapToVoteSelectionCardProps = <T extends Hero | Item >(
-    data: T
-): VoteSelectionCardProps => ({
-    id: data.id,
-    display_name: data.name,
-    image_name: `${"item_name" in data ? data.item_name : data.hero_name}`,
-    voteModel: data
-});
+import { mapToVoteModel } from '../../../models/utility';
+import "./VoteSelectionList.css";
 
 function VoteSelectionList() {
     const curMode = useSelector((state: RootState) => state.app.mode)
@@ -25,16 +17,16 @@ function VoteSelectionList() {
     const heroes = useMemo(() => {
         return heroesArr.map((hero: Hero) => {
             if (query === "" || hero.name.toLowerCase().includes(query.toLowerCase())) {
-                const voteCardProps = mapToVoteSelectionCardProps(hero)
-                return <VoteSelectionCard {...voteCardProps} />
+                const voteCardModel = mapToVoteModel(hero)
+                return <VoteSelectionCard voteCardModel={voteCardModel} />
             }
         })
     }, [heroesArr, query])
     const items = useMemo(() => { 
         return itemsArr.map((item: Item) => {
             if (query === "" || item.name.toLowerCase().includes(query.toLowerCase())) {
-                const voteCardProps = mapToVoteSelectionCardProps(item)
-                return <VoteSelectionCard {...voteCardProps} />
+                const voteCardModel = mapToVoteModel(item)
+                return <VoteSelectionCard voteCardModel={voteCardModel} />
             }
         });
     }, [itemsArr, query]); // Re-runs when `someDependency` changes

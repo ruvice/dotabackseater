@@ -1,21 +1,27 @@
 import "./VoteSection.css"
-import { Item } from '../../../models/models';
+import { VoteModel } from '../../../models/models';
 import LazyImage from "../voteMenu/LazyImage";
 import { AppDispatch, RootState } from "../../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { castVote } from "../voteSlice";
+import { castItemVote, castHeroVote } from "../voteSlice";
 import { useEffect, useState } from "react";
+import { AppMode } from "../../../appSlice";
 
 type VoteSectionValidProps = {
-    item: Item
+    voteSelection: VoteModel
 }
 
-function VoteSectionValid(props: VoteSectionValidProps) {
-    const { item } = props;
+function VoteSectionValidButton(props: VoteSectionValidProps) {
+    const { voteSelection } = props;
     const countdown = useSelector((state: RootState) => state.vote.countdown);
+    const curMode = useSelector((state: RootState) => state.app.mode);
     const dispatch = useDispatch<AppDispatch>()
     const handleVote = async () => {
-        dispatch(castVote())
+        if (curMode === AppMode.Hero) {
+            dispatch(castHeroVote())
+        } else {
+            dispatch(castItemVote())
+        }
     }
     // Local state to track whether the countdown has passed
     const [isCooldown, setIsCooldown] = useState(countdown > Date.now());
@@ -42,13 +48,13 @@ function VoteSectionValid(props: VoteSectionValidProps) {
                     onClick={handleVote}
                 >
                     <div className="h-[21] align-center ml-4">
-                        <LazyImage itemName={item.item_name} height={21} width={28.3} />
+                        <LazyImage imageName={voteSelection.image_name} height={21} width={28.3} />
                     </div>
-                    <p className="text-dota-text-white pl-3 font-semibold self-center">Vote {item.name}</p>
+                    <p className="text-dota-text-white pl-3 font-semibold self-center">Vote {voteSelection.display_name}</p>
                 </div>
             </div>
         </>
     );
 }
 
-export default VoteSectionValid;
+export default VoteSectionValidButton;

@@ -9,25 +9,25 @@ const initialState: ItemState = {
 }
 
 export const getItems = createAsyncThunk('getItems', async (_, { getState, rejectWithValue }) => {
-  const apiURL =
-    process.env.NODE_ENV === 'production'
-      ? process.env.REACT_APP_SERVER_URI
-      : process.env.REACT_APP_API_DEV;
-  const response = await fetch(apiURL + "item");
-  if (!response.ok) { 
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  const res: Item[] = await response.json();
-  const itemsArr: Item[] = res.map(item => ({
-    ...item,
-    type: "item",
-  }));
-  const items = getItemsFromArr(itemsArr)
-  const result: FetchItemResult = {
-    items: items,
-    itemsArr: itemsArr
-  }
-  return result
+    const apiURL =
+        process.env.NODE_ENV === 'production'
+            ? process.env.REACT_APP_SERVER_URI
+            : process.env.REACT_APP_API_DEV;
+    const response = await fetch(apiURL + "item");
+    if (!response.ok) { 
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const res: Item[] = await response.json();
+    const itemsArr: Item[] = res.map(item => ({
+        ...item,
+        type: "item",
+    }));
+    const items = getItemsFromArr(itemsArr)
+    const result: FetchItemResult = {
+        items: items,
+        itemsArr: itemsArr
+    }
+    return result
 });
 
 const getItemsFromArr = (itemsArr: Item[]) => {

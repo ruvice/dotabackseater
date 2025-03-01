@@ -11,26 +11,28 @@ const imageMap: Record<string, string> = images.keys().reduce((acc: { [x: string
 }, {} as Record<string, string>);   
 
 interface LazyImageProps {
-  itemName: string;
-  height: number;
-  width: number
+    imageName: string;
+    height: number;
+    width: number
 }
 
-const LazyImage: React.FC<LazyImageProps> = ({ itemName, height, width }) => {
+const LazyImage: React.FC<LazyImageProps> = ({ imageName, height, width }) => {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
-        if (imageMap[itemName]) {
-            setImageSrc(imageMap[itemName]);
+        if (imageMap[imageName]) {
+            setImageSrc(imageMap[imageName]);
+            setLoading(false);
         } else {
-            console.error(`Image not found for item: ${itemName}`);
+            console.error(`Image not found for: ${imageName}`);
             setImageSrc(null);
         }
-    }, [itemName]);
-
+    }, [imageName]);
+    console.log(width, height)
     return (
-    <Suspense fallback={<div>Loading image...</div>}>
-        {imageSrc ? <img width={width} height={height} src={imageSrc} alt={`Image of ${itemName}`} className='inline'/> : <div>Image not available</div>}
-    </Suspense>
+        <>
+            {(imageSrc && !loading) ? <img style={{ height: height, width: "auto" }} src={imageSrc} alt={`Image of ${imageName}`} className='inline'/> : <div style={{width: width, height: height}}/>}
+        </>
     );
 };
 

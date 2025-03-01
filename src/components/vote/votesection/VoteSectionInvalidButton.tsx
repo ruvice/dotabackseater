@@ -3,7 +3,7 @@ import "./VoteSection.css"
 import { RootState } from "../../../store";
 import { AppMode } from "../../../appSlice";
 
-function VoteSectionInvalid() {
+function VoteSectionInvalidButton() {
 
     const curMode = useSelector((state: RootState) => state.app.mode)
     return (
@@ -13,4 +13,4 @@ function VoteSectionInvalid() {
     );
 }
 
-export default VoteSectionInvalid;
+export default VoteSectionInvalidButton;

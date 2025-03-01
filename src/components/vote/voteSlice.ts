@@ -9,44 +9,86 @@ const initialState: VoteState = {
   countdown: Date.now()
 }
 
-export const castVote = createAsyncThunk('vote', async (_, { getState, rejectWithValue }) => {
-  const state = getState() as RootState; // Cast the state to RootState type
-  const channelId = state.twitch.channelId; // Access the channelId from the state
-  const userId = state.twitch.userId; // Example: Access userId from user state
-  const countdown = state.vote.countdown;
-  const selectedItem = state.vote.selectedItem;
-  
-  const apiURL =
+export const castItemVote = createAsyncThunk('voteItem', async (_, { getState, rejectWithValue }) => {
+    const state = getState() as RootState; // Cast the state to RootState type
+    const channelId = state.twitch.channelId; // Access the channelId from the state
+    const userId = state.twitch.userId; // Example: Access userId from user state
+    const countdown = state.vote.countdown;
+    const selectedItem = state.vote.selectedItem;
+
+    const apiURL =
     process.env.NODE_ENV === 'production'
-      ? process.env.REACT_APP_SERVER_URI
-      : process.env.REACT_APP_API_DEV;
-  if (Date.now() >= countdown) {
-    try {
-      const response = await fetch(apiURL + `vote/`, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-        "channel_id": channelId,
-        "twitch_id": userId,
-        "item_id": selectedItem?.id 
-        })
-      })
-      if (response.status === 429) {
-        const retryAfter = Number(response.headers.get('Retry-After'))
-        voteSlice.actions.setCountdown(Date.now()+retryAfter)
-        return rejectWithValue({ retryAfter: retryAfter })
-      }
-      if (!response.ok) {
-        throw new Error('Failed to fetch votes');
-      }
-    } catch(err) {
-      throw new Error('Failed to send')
+        ? process.env.REACT_APP_SERVER_URI
+        : process.env.REACT_APP_API_DEV;
+    if (Date.now() >= countdown) {
+        try {
+            const response = await fetch(apiURL + `vote/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Channel-Id': channelId
+                },
+                body: JSON.stringify({
+                    "channel_id": channelId,
+                    "twitch_id": userId,
+                    "item_id": selectedItem?.id 
+                })
+            })
+            if (response.status === 429) {
+                const retryAfter = Number(response.headers.get('Retry-After'))
+                voteSlice.actions.setCountdown(Date.now()+retryAfter)
+                return rejectWithValue({ retryAfter: retryAfter })
+            }
+            if (!response.ok) {
+                throw new Error('Failed to fetch votes');
+            }
+        } catch(err) {
+            throw new Error('Failed to send')
+        }
+    } else {
+        throw new Error('Countdown not over')
     }
-  } else {
-    throw new Error('Countdown not over')
-  }
+});
+
+export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, rejectWithValue }) => {
+    const state = getState() as RootState; // Cast the state to RootState type
+    const channelId = state.twitch.channelId; // Access the channelId from the state
+    const userId = state.twitch.userId; // Example: Access userId from user state
+    const countdown = state.vote.countdown;
+    const selectedHero = state.vote.selectedHero;
+
+    const apiURL =
+    process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_SERVER_URI
+        : process.env.REACT_APP_API_DEV;
+    if (Date.now() >= countdown) {
+        try {
+            const response = await fetch(apiURL + `vote/hero/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Channel-Id': channelId
+                },
+                body: JSON.stringify({
+                    "channel_id": channelId,
+                    "twitch_id": userId,
+                    "hero_id": selectedHero?.id 
+                })
+            })
+            if (response.status === 429) {
+                const retryAfter = Number(response.headers.get('Retry-After'))
+                voteSlice.actions.setCountdown(Date.now()+retryAfter)
+                return rejectWithValue({ retryAfter: retryAfter })
+            }
+            if (!response.ok) {
+                throw new Error('Failed to fetch votes');
+            }
+        } catch(err) {
+            throw new Error('Failed to send')
+        }
+    } else {
+        throw new Error('Vote session ended')
+    }
 });
 
 const voteSlice = createSlice({
@@ -66,16 +108,20 @@ const voteSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(castVote.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(castItemVote.fulfilled, (state, action: PayloadAction<any>) => {
         state.selectedItem = null; // Optionally clear the selected item
         state.countdown = Date.now() + 15 * 1000; // Reset the countdown or update it as needed
       })
-      .addCase(castVote.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(castItemVote.rejected, (state, action: PayloadAction<any>) => {
         const payload = action.payload
         if (payload !== undefined) {
           const retryAfter = payload.retryAfter
           state.countdown = Date.now() + retryAfter * 1000; // Reset the countdown or update it as needed
         }
+      })
+      .addCase(castHeroVote.fulfilled, (state, action: PayloadAction<any>) => {
+        state.selectedHero = null; // Optionally clear the selected item
+        state.countdown = Date.now() + 15 * 1000; // Reset the countdown or update it as needed
       })
   },
 });

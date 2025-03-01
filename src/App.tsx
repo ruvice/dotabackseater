@@ -30,7 +30,13 @@ function App() {
                 : process.env.REACT_APP_API_DEV;
             const fetchData = async () => {
                 try {
-                    const response = await fetch(apiURL + "config/" + auth.channelId);
+                    const response = await fetch(apiURL + "config/" + auth.channelId,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Channel-Id": auth.channelId
+                        }
+                    });
                 if (!response.ok) { 
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

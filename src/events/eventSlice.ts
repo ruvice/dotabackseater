@@ -9,22 +9,22 @@ const initialState: EventState = {
 }
 
 export const getExtensionVoteStatus = createAsyncThunk('getExtensionVoteStatus', async (_, { getState, rejectWithValue }) => {
-  const state = getState() as RootState; // Cast the state to RootState type
-  const channelId = state.twitch.channelId; // Access the channelId from the state
-  const apiURL =
+    const state = getState() as RootState; // Cast the state to RootState type
+    const channelId = state.twitch.channelId; // Access the channelId from the state
+    const apiURL =
     process.env.NODE_ENV === 'production'
-      ? process.env.REACT_APP_SERVER_URI
-      : process.env.REACT_APP_API_DEV;
-  const response = await fetch(apiURL + 'vote/' + channelId);
-  if (!response.ok) { 
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  const res = await response.json();
-  const result: FetchExtensionVoteStatusResult = {
-    currentCount: res['current_count'],
-    lastChatVotedItemID: res['item_id']
-  }
-  return result
+        ? process.env.REACT_APP_SERVER_URI
+        : process.env.REACT_APP_API_DEV;
+    const response = await fetch(apiURL + 'vote/' + channelId);
+    if (!response.ok) { 
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const res = await response.json();
+    const result: FetchExtensionVoteStatusResult = {
+        currentCount: res['current_count'],
+        lastChatVotedItemID: res['item_id']
+    }
+    return result
 });
 
 const eventSlice = createSlice({

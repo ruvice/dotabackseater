@@ -15,7 +15,7 @@ const ChatSuggestion = () => {
     return (
         <div className="chat-suggestion flex flex-col bg-dota-panel-item-box rounded-lg mt-1 p-2">
             <div className={`chat-suggestion-box ${item ? 'pl-2' : 'justify-center'}`}>
-                {item && <LazyImage itemName={item?.item_name} height={48} width={63}/>}
+                {item && <LazyImage imageName={item?.item_name} height={48} width={63}/>}
                 <div className="chat-suggestion-item flex flex-col pl-2">
                 <p className="chat-suggestion-text text-dota-text-white font-semibold font-sans">Chat's suggestion</p>
                     <p className="text-dota-text-white text-xs">{item ? item.name : 'Nothing voted yet!'}</p>

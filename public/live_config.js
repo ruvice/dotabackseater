@@ -21,7 +21,7 @@ twitch.configuration.onChanged(function(){
         voteThresholdInput.value = Number(voteThreshold)
         const currentVoteThreshold = document.getElementById('currentVoteThreshold')
         currentVoteThreshold.textContent = voteThreshold
-      }else{
+      } else {
         console.log('invalid config')
       }
     }catch(e){
@@ -31,10 +31,20 @@ twitch.configuration.onChanged(function(){
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('form');
-  form.addEventListener('submit', (event) => {
-      event.preventDefault(); // Prevent default form submission
-      updateConfig();
+    const form = document.getElementById('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const submitterId = event.submitter.id
+        if (submitterId === 'start-button') {
+            console.log('starting vote');
+            startVote();
+        } else if (submitterId === 'stop-button') {
+            console.log('stopping vote');
+            stopVote();
+        } else {
+            console.log('reseting vote');
+            resetVote();
+        }
   });
 });
 
@@ -42,11 +52,11 @@ async function updateConfig(){
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
   const currentVoteThreshold = document.getElementById('currentVoteThreshold')
   currentVoteThreshold.textContent = voteThreshold.value
-//   const url = "http://localhost:3000/config/" + channelID; // Example API endpoint
-  const url = "https://dotabackseater.ruvice.com/config/" + channelID; // Example API endpoint
+//   const url = "http://localhost:3000/config/" + channelID;
+  const url = "https://dotabackseater.ruvice.com/config/" + channelID;
   try {
     const response = await fetch(url, {
-        method: "POST", // HTTP method
+        method: "POST", // HTTP method,
         headers: {
             "channel-id": channelID
         }
