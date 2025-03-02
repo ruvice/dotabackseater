@@ -129,7 +129,7 @@ const voteSlice = createSlice({
       })
       .addCase(castHeroVote.fulfilled, (state, action: PayloadAction<any>) => {
         state.selectedHero = null; // Optionally clear the selected item
-        state.hasVoted = true
+        // state.hasVoted = true
       })
   },
 });

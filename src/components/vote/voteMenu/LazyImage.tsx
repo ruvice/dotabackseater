@@ -6,6 +6,7 @@ const images = (require as any).context('../../../assets', false, /\.(png|jpe?g|
 // Create a map of images using the filenames as keys
 const imageMap: Record<string, string> = images.keys().reduce((acc: { [x: string]: any; }, path: string) => {
     const imageName = path.replace('./', '').replace(/(_lg)?\.png$/, '');
+    console.log(path)
     acc[imageName] = images(path);
     return acc;
 }, {} as Record<string, string>);   

@@ -1,0 +1,47 @@
+@tailwind components;
+
+@layer components {
+    .minimised-hero-list {
+        background-color: #282828; /* Card background */
+    }
+    .minimised-hero-no-vote {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .minimised-hero-vote-content {
+        display: flex;
+        align-self: center;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        grid-template-rows: auto auto;
+        column-gap: 2px; /* ✅ Controls horizontal spacing */
+        row-gap: 4px; /* ✅ Controls vertical spacing */
+        margin: auto;
+        height: 48px;
+    }
+      
+    .grid-item {
+        border: 1px solid #444; /* Optional border for card */
+        border-radius: 4px; /* Optional rounded corners */
+        text-align: center;
+        border-radius: 5px;
+        height: 28px;
+        max-width: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 2s ease-in-out; /* ✅ Smooth animations */
+        position: relative;
+    }
+    /* Ensure the last 2 items span the full width of 2 columns */
+    .grid-item:nth-child(4) {
+        grid-column: 1 / span 1.5;
+    }
+    .grid-item:nth-child(5) {
+        grid-column: 2 / span 1.5;
+    }
+}

@@ -55,9 +55,8 @@ export const getExtensionHeroVoteStatus = createAsyncThunk('getExtensionHeroVote
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result: FetchExtensionHeroVoteStatusResult = await response.json();
-    dispatch(setHasActiveVoteSession(true))
+    dispatch(setHasActiveVoteSession(result.has_active_vote_session))
     dispatch(setHasVoted(result.has_voted))
-    console.log("ANDREW", result, result.hero_vote_map, result.has_voted)
     return result
 });
 
@@ -78,6 +77,9 @@ const eventSlice = createSlice({
     clearState(state) {
         state = initialState
     },
+    clearHeroVoteMap(state) {
+        state.heroVoteMap = undefined
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -94,5 +96,5 @@ const eventSlice = createSlice({
   },
 });
 
-export const { updateVotesRequired, updateLastChatVotedItem, clearState, updateHeroVoteMap } = eventSlice.actions;
+export const { updateVotesRequired, updateLastChatVotedItem, clearState, updateHeroVoteMap, clearHeroVoteMap } = eventSlice.actions;
 export default eventSlice.reducer;

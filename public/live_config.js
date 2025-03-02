@@ -6,7 +6,7 @@ const twitch = window.Twitch.ext;
 // onAuthorized callback called each time JWT is fired
 twitch.onAuthorized((auth) => {
   // save our credentials
-  console.log("got auth in live_config")
+  console.log("got auth in live_config", auth)
   token = auth.token; //JWT passed to backend for authentication 
   userId = auth.userId; //opaque userID 
   channelID = auth.channelId;

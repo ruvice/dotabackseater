@@ -14,5 +14,6 @@ export type FetchExtensionItemVoteStatusResult = {
 
 export type FetchExtensionHeroVoteStatusResult = {
     hero_vote_map: HeroVoteMap,
+    has_active_vote_session: boolean,
     has_voted: boolean
 }

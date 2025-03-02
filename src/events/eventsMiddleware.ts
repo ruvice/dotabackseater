@@ -1,6 +1,6 @@
 // middleware/sseMiddleware.ts
 import { Middleware } from '@reduxjs/toolkit';
-import { updateHeroVoteMap, updateLastChatVotedItem, updateVotesRequired } from './eventSlice';
+import { clearHeroVoteMap, updateHeroVoteMap, updateLastChatVotedItem, updateVotesRequired } from './eventSlice';
 import { setHasActiveVoteSession, setHasVoted } from '../components/vote/voteSlice';
 
 let eventSource: EventSource | null = null;
@@ -25,13 +25,14 @@ export const sseMiddleware: Middleware = (store) => (next) => (action: any) => {
         });
 
         eventSource.addEventListener('votedHero', (event) => {
-            store.dispatch(updateHeroVoteMap(event.data))
+            store.dispatch(updateHeroVoteMap(JSON.parse(event.data)))
         })
 
         eventSource.addEventListener('voteSession', (event) => {
             if (event.data === "started") {
                 store.dispatch(setHasActiveVoteSession(true))
                 store.dispatch(setHasVoted(false))
+                store.dispatch(clearHeroVoteMap())
             } else {
                 store.dispatch(setHasActiveVoteSession(false))
                 store.dispatch(setHasVoted(false))
