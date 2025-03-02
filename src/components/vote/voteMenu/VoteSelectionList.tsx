@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useSelector } from "react-redux";
 import { Hero, Item } from '../../../models/models';
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 import VoteSelectionCard from './VoteSelectionCard';
-import { AppMode } from '../../../appSlice';
+import { AppMode } from '../../../store/appSlice';
 import { mapToVoteModel } from '../../../models/utility';
 import "./VoteSelectionList.css";
 

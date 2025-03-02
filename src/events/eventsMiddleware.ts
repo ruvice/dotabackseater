@@ -1,7 +1,7 @@
 // middleware/sseMiddleware.ts
 import { Middleware } from '@reduxjs/toolkit';
-import { clearHeroVoteMap, updateHeroVoteMap, updateLastChatVotedItem, updateVotesRequired } from './eventSlice';
-import { setHasActiveVoteSession, setHasVoted } from '../components/vote/voteSlice';
+import { clearHeroVoteMap, updateHeroVoteMap, updateLastChatVotedItem, updateVotesRequired } from '../store/eventSlice';
+import { setHasActiveVoteSession, setHasVoted } from '../store/voteSlice';
 
 let eventSource: EventSource | null = null;
 

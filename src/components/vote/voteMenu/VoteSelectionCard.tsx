@@ -1,8 +1,8 @@
 import './VoteSelectionCard.css'
 import { Hero, Item, VoteModel } from '../../../models/models';
 import LazyImage from "./LazyImage";
-import { AppDispatch } from '../../../store';
-import { select } from '../voteSlice';
+import { AppDispatch } from '../../../store/store';
+import { select } from '../../../store/voteSlice';
 import { useDispatch } from 'react-redux';
 
 // Define the type of the data being fetched

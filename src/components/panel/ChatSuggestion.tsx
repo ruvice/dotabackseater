@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Item } from '../../models/models'
-import { RootState } from '../../store'
+import { RootState } from '../../store/store'
 import LazyImage from '../vote/voteMenu/LazyImage'
 import "./ChatSuggestion.css"
 

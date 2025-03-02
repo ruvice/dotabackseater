@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import './CountdownBar.css'
 import React from 'react';
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/store';
 import { useEffect, useState } from 'react';
 
 function CountdownBar() {

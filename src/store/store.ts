@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import voteReducer from './components/vote/voteSlice';
-import searchReducer from './components/search/searchSlice'
-import twitchReducer from './twitch/twitchSlice'
-import itemReducer from './components/vote/item/itemSlice'
-import eventReducer from './events/eventSlice'
+import voteReducer from './voteSlice';
+import searchReducer from './searchSlice'
+import twitchReducer from './twitchSlice'
+import itemReducer from './itemSlice'
+import eventReducer from './eventSlice'
 import appReducer from './appSlice'
-import heroReducer from './components/vote/hero/heroSlice'
-import { sseMiddleware } from './events/eventsMiddleware';
+import heroReducer from './heroSlice'
+import { sseMiddleware } from '../events/eventsMiddleware';
 const store = configureStore({
   reducer: {
     vote: voteReducer,

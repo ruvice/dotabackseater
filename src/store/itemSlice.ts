@@ -1,7 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FetchItemResult, ItemMap, ItemState } from './itemTypes';
-import { Item } from '../../../models/models';
+import { Item } from '../models/models';
 
+export type ItemMap = {
+    [key: string]: Item
+}
+
+export type FetchItemResult = {
+    items: ItemMap
+    itemsArr: Item[]
+}
+
+export interface ItemState {
+    loading: boolean
+    itemsArr: Item[]
+    items: ItemMap
+}
+  
 const initialState: ItemState = {
   loading: true,
   itemsArr: [],

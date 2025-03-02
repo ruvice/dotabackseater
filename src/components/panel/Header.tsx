@@ -1,9 +1,9 @@
 import React from 'react'
 import "./Header.css"
-import { AppMode, selectMode } from '../../appSlice'
+import { AppMode, selectMode } from '../../store/appSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
-import { clearQuery } from '../search/searchSlice';
+import { AppDispatch, RootState } from '../../store/store';
+import { clearQuery } from '../../store/searchSlice';
 import { motion } from "framer-motion";
 
 function Header() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Hero, HeroVoteMap, Item } from '../../models/models'
-import { RootState } from '../../store'
+import { RootState } from '../../store/store'
 import LazyImage from '../vote/voteMenu/LazyImage'
 import { AnimatePresence, motion } from "framer-motion";
 import "./HeroVoteResultView.css"

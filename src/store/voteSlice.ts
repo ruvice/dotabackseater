@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Hero, Item } from '../../models/models';
-import { VoteState } from './voteTypes';
-import { RootState } from '../../store';
+import { Hero, Item } from '../models/models';
+import { RootState } from './store';
+
+export interface VoteState {
+    selectedItem: Item | null
+    selectedHero: Hero | null
+    countdown: number
+    hasActiveHeroVoteSession: boolean
+    hasVoted: boolean
+}
 
 const initialState: VoteState = {
   selectedItem: null,

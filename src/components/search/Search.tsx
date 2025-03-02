@@ -1,10 +1,10 @@
 import "./Search.css"
-import { RootState, AppDispatch } from '../../store';
+import { RootState, AppDispatch } from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as CloseIcon } from '../../closeicon.svg';
 import { ReactComponent as SearchIcon } from '../../searchicon.svg';
-import { clearQuery, updateQuery } from "./searchSlice";
-import { AppMode } from "../../appSlice";
+import { clearQuery, updateQuery } from "../../store/searchSlice";
+import { AppMode } from "../../store/appSlice";
 
 function Search() { 
     const query = useSelector((state: RootState) => state.search.query);

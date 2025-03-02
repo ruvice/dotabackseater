@@ -2,16 +2,12 @@ import { useEffect } from 'react';
 import VoteSection from './components/vote/votesection/VoteSection';
 import Tooltip from './components/tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from './store';
-import { updateChannelId, updateClientId, updateToken, updateUserId, updateStreamerConfig } from './twitch/twitchSlice';
+import { updateChannelId, updateClientId, updateToken, updateUserId, updateStreamerConfig, getHeroes, 
+    AppDispatch, RootState, getExtensionHeroVoteStatus, getExtensionItemVoteStatus, getItems } from './store/index';
 import { StreamerConfig } from './models/streamerConfig';
-import { getItems } from './components/vote/item/itemSlice';
 import Panel from './components/panel/Panel';
-import { getExtensionHeroVoteStatus, getExtensionItemVoteStatus } from './events/eventSlice';
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
-import { getHeroes } from './components/vote/hero/heroSlice';
-import Reordering from './Reordering';
 
 // Define the type of the data being fetched
 function App() {

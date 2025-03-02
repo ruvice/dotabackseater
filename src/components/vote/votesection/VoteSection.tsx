@@ -1,10 +1,10 @@
 import "./VoteSection.css"
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
 import VoteSectionValidButton from "./VoteSectionValidButton";
 import VoteSectionInvalidButton from "./VoteSectionInvalidButton";
 import CountdownBar from "./CountdownBar";
-import { AppMode } from "../../../appSlice";
+import { AppMode } from "../../../store/appSlice";
 import { mapToVoteModel } from "../../../models/utility";
 import { useEffect, useState } from "react";
 import { VoteModel } from "../../../models/models";

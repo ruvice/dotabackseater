@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TwitchState } from './twitchTypes';
-import { StreamerConfig } from '../models/streamerConfig';
+import { StreamerConfig } from "../models/streamerConfig";
+
+export interface TwitchState {
+    userId: string,
+    clientId: string,
+    token: string,
+    channelId: string,
+    streamerConfig: StreamerConfig
+}
 
 const defaultStreamerConfig: StreamerConfig = {
   vote_threshold: "10"

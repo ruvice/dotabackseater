@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./VoteSection.css"
-import { RootState } from "../../../store";
-import { AppMode } from "../../../appSlice";
+import { RootState } from "../../../store/store";
+import { AppMode } from "../../../store/appSlice";
 
 function VoteSectionInvalidButton() {
 

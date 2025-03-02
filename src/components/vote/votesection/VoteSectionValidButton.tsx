@@ -1,11 +1,9 @@
 import "./VoteSection.css"
 import { VoteModel } from '../../../models/models';
 import LazyImage from "../voteMenu/LazyImage";
-import { AppDispatch, RootState } from "../../../store";
+import { AppDispatch, RootState, castItemVote, castHeroVote, AppMode  } from "../../../store/index";
 import { useDispatch, useSelector } from "react-redux";
-import { castItemVote, castHeroVote } from "../voteSlice";
 import { useEffect, useState } from "react";
-import { AppMode } from "../../../appSlice";
 
 type VoteSectionValidProps = {
     voteSelection: VoteModel

@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 import ChatSuggestion from "./ChatSuggestion";
 import HeroVoteResultView from "./HeroVoteResultView";
-import { AppMode } from "../../appSlice";
+import { AppMode } from "../../store/appSlice";
 
 
 function Panel() { 

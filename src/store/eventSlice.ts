@@ -1,9 +1,26 @@
 // eventSlice.ts
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EventState, FetchExtensionHeroVoteStatusResult, FetchExtensionItemVoteStatusResult } from './eventTypes';
-import { AppDispatch, RootState } from '../store';
-import { setHasActiveVoteSession, setHasVoted } from '../components/vote/voteSlice';
-import { HeroVoteMap } from '../models/models';
+import { AppDispatch, RootState } from './store';
+import { HeroVoteMap } from "../models/models"
+import { setHasActiveVoteSession, setHasVoted } from './voteSlice';
+
+export interface EventState {
+    lastChatVotedItemID: string
+    currentCount: number
+    heroVoteMap: HeroVoteMap
+    hasVoted: boolean
+}
+
+export type FetchExtensionItemVoteStatusResult = {
+    currentCount: number
+    lastChatVotedItemID: string
+}
+
+export type FetchExtensionHeroVoteStatusResult = {
+    hero_vote_map: HeroVoteMap,
+    has_active_vote_session: boolean,
+    has_voted: boolean
+}
 
 const initialState: EventState = {
   lastChatVotedItemID: "",
@@ -11,7 +28,6 @@ const initialState: EventState = {
   heroVoteMap: undefined,
   hasVoted: false
 }
-
 
 export const getExtensionItemVoteStatus = createAsyncThunk('getExtensionItemVoteStatus', async (_, { getState, rejectWithValue }) => {
     const state = getState() as RootState; // Cast the state to RootState type
