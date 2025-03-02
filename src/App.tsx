@@ -11,6 +11,7 @@ import { getExtensionHeroVoteStatus, getExtensionItemVoteStatus } from './events
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
 import { getHeroes } from './components/vote/hero/heroSlice';
+import Reordering from './Reordering';
 
 // Define the type of the data being fetched
 function App() {
@@ -59,6 +60,7 @@ function App() {
   }, [dispatch])
 
   return (
+    // <Reordering />
     <div className="bg-dota-dark-tile-background max-h-[496px] h-[496px] w-[318px] max-w-[318px] p-3 overflow-hidden relative">
         <Header />
         <Panel />

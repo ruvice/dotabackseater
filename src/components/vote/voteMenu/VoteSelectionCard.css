@@ -8,11 +8,13 @@
     border-radius: 4px; /* Optional rounded corners */
     text-align: left; /* Center text inside card */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    transition: all 0.25s ease-in-out; /* ✅ Smooth animations */
 }
 
 .div-voteItem {
     display: flex;
     align-items: center;
+    transition: all 0.25s ease-in-out; /* ✅ Smooth animations */
 }
 
 .p {

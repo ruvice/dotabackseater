@@ -11,5 +11,6 @@
     .header_tab {
         cursor: pointer;
         box-sizing: border-box;
+        transition: all 0.25s ease-in-out; /* ✅ Smooth animations */  
     }
 }

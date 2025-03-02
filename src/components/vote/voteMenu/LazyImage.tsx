@@ -23,7 +23,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ imageName, height, width }) => {
     useEffect(() => {
         if (imageMap[imageName]) {
             setImageSrc(imageMap[imageName]);
-            setLoading(false);
+            // setLoading(false);
         } else {
             console.error(`Image not found for: ${imageName}`);
             setImageSrc(null);
@@ -31,7 +31,19 @@ const LazyImage: React.FC<LazyImageProps> = ({ imageName, height, width }) => {
     }, [imageName]);
     return (
         <>
-            {(imageSrc && !loading) ? <img style={{ height: height, width: "auto" }} src={imageSrc} alt={`Image of ${imageName}`} className='inline'/> : <div style={{width: width, height: height}}/>}
+        <div className="image-wrapper" style={{ width, height, display: "flex", flexDirection: "column", justifyContent: "center" }}> {/* ✅ Fixed size div */}
+            {(imageSrc && !loading) && <div className="placeholder"></div>} {/* ✅ Placeholder while loading */}
+            {imageSrc &&
+                <img
+                    src={imageSrc}
+                    width={width}
+                    height={height}
+                    onLoad={() => setLoading(false)} // ✅ Hide placeholder when loaded
+                    className={`image ${loading ? "hidden" : ""}`} // ✅ Hide image initially
+                />
+            }
+        </div>
+            {/* {(imageSrc && !loading) ? <img style={{ height: height, width: "auto" }} src={imageSrc} alt={`Image of ${imageName}`} className='inline'/> : <div style={{width: width, height: height}}/>} */}
         </>
     );
 };
