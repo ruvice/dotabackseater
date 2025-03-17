@@ -21,4 +21,17 @@ export interface VoteModel {
     voteModel: Item | Hero;
 }
 
-export type HeroVoteMap = Record<string, number> | undefined
+export type HeroVoteMap = Record<string, number> | undefined;
+
+
+export enum ToastType {
+    Success = "success",
+    Error = "error",
+    Loading = "loading",
+}
+
+export interface ToastEvent {
+    message: string;
+    type: ToastType;
+    id: number;
+}

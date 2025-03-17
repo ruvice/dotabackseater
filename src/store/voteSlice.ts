@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Hero, Item } from '../models/models';
+import { Hero, Item, ToastEvent, ToastType } from '../models/models';
 import { RootState } from './store';
+import { triggerToast } from './toastSlice';
 
 export interface VoteState {
     selectedItem: Item | null
@@ -59,7 +60,7 @@ export const castItemVote = createAsyncThunk('voteItem', async (_, { getState, r
     }
 });
 
-export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, rejectWithValue }) => {
+export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, dispatch, rejectWithValue }) => {
     const state = getState() as RootState; // Cast the state to RootState type
     const channelId = state.twitch.channelId; // Access the channelId from the state
     const userId = state.twitch.userId; // Example: Access userId from user state
@@ -70,32 +71,35 @@ export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, r
     process.env.NODE_ENV === 'production'
         ? process.env.REACT_APP_SERVER_URI
         : process.env.REACT_APP_API_DEV;
-    if (Date.now() >= countdown) {
-        try {
-            const response = await fetch(apiURL + `vote/hero/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Channel-Id': channelId
-                },
-                body: JSON.stringify({
-                    "channel_id": channelId,
-                    "twitch_id": userId,
-                    "hero_id": selectedHero?.id 
-                })
+    try {
+        const response = await fetch(apiURL + `vote/hero/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Channel-Id': channelId
+            },
+            body: JSON.stringify({
+                "channel_id": channelId,
+                "twitch_id": userId,
+                "hero_id": selectedHero?.id 
             })
-            if (response.status === 429) {
-                const retryAfter = Number(response.headers.get('Retry-After'))
-                return rejectWithValue({ retryAfter: retryAfter })
-            }
-            if (!response.ok) {
-                throw new Error('Failed to fetch votes');
-            }
-        } catch(err) {
-            throw new Error('Failed to send')
+        })
+        if (response.status === 429) {
+            const retryAfter = Number(response.headers.get('Retry-After'))
+            return rejectWithValue({ retryAfter: retryAfter })
         }
-    } else {
-        throw new Error('Vote session ended')
+        if (!response.ok) {
+            const errorData = await response.json();
+            const toastEvent: ToastEvent = {
+                message: errorData["error_message"],
+                id: Date.now(),
+                type: ToastType.Error
+            }
+            dispatch(triggerToast(toastEvent));
+            throw new Error('Failed to fetch votes');
+        }
+    } catch(err) {
+        throw new Error('Failed to send')
     }
 });
 

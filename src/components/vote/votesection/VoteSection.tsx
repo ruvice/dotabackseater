@@ -29,7 +29,6 @@ function VoteSection() {
 
     // 🟢 Memoize the button selection logic
     const voteButton = useMemo(() => {
-        console.log("Getting vote section validity");
         if (curMode === AppMode.Hero) {
         return hasActiveHeroVoteSession && voteSelection && !hasVoted
             ? <VoteSectionValidButton voteSelection={voteSelection} />

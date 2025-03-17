@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./VoteSection.css"
-import { RootState } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../store/store";
 import { AppMode } from "../../../store/appSlice";
 import { useMemo } from "react";
 
@@ -25,7 +25,7 @@ function VoteSectionInvalidButton() {
             return "Select an item to vote"
         }
     }, [curMode, hasActiveHeroVoteSession, hasVoted]);
-
+    
     return (
         <div className="vote-sectionInvalid flex justify-center">
             <p className="text-dota-text-white self-center">{message}</p>
@@ -34,3 +34,4 @@ function VoteSectionInvalidButton() {
 }
 
 export default VoteSectionInvalidButton;
+

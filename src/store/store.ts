@@ -6,6 +6,7 @@ import itemReducer from './itemSlice'
 import eventReducer from './eventSlice'
 import appReducer from './appSlice'
 import heroReducer from './heroSlice'
+import toastReducer from './toastSlice'
 import { sseMiddleware } from '../events/eventsMiddleware';
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     item: itemReducer,
     hero: heroReducer,
     event: eventReducer,
-    app: appReducer
+    app: appReducer,
+    toast: toastReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sseMiddleware),

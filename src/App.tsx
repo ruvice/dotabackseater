@@ -8,6 +8,7 @@ import { StreamerConfig } from './models/streamerConfig';
 import Panel from './components/panel/Panel';
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
+import ToastManager from './components/toast/ToastManager';
 // Define the type of the data being fetched
 function App() {
     // Initial setup
@@ -60,6 +61,7 @@ function App() {
         <VoteSelectionSection />
         <VoteSection />
         <Tooltip />
+        <ToastManager />
     </div>
   );
 }
