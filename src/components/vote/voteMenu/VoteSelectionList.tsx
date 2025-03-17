@@ -18,7 +18,7 @@ function VoteSelectionList() {
         return heroesArr.map((hero: Hero) => {
             if (query === "" || hero.name.toLowerCase().includes(query.toLowerCase())) {
                 const voteCardModel = mapToVoteModel(hero)
-                return <VoteSelectionCard voteCardModel={voteCardModel} />
+                return <VoteSelectionCard key={voteCardModel.id} voteCardModel={voteCardModel} />
             }
         })
     }, [heroesArr, query])
@@ -26,7 +26,7 @@ function VoteSelectionList() {
         return itemsArr.map((item: Item) => {
             if (query === "" || item.name.toLowerCase().includes(query.toLowerCase())) {
                 const voteCardModel = mapToVoteModel(item)
-                return <VoteSelectionCard voteCardModel={voteCardModel} />
+                return <VoteSelectionCard key={voteCardModel.id} voteCardModel={voteCardModel} />
             }
         });
     }, [itemsArr, query]); // Re-runs when `someDependency` changes

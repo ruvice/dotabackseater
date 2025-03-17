@@ -31,7 +31,6 @@ export const castItemVote = createAsyncThunk('voteItem', async (_, { getState, r
         : process.env.REACT_APP_API_DEV;
     if (Date.now() >= countdown) {
         try {
-            console.log("voting item")
             const response = await fetch(apiURL + `vote/`, {
                 method: 'POST',
                 headers: {

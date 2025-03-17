@@ -47,14 +47,12 @@ function VoteSection() {
             }
         }
     }, [curMode, selectedHero, selectedItem, hasActiveHeroVoteSession])
-    console.log("hasActiveHeroVoteSession", hasActiveHeroVoteSession)
-    console.log("hasVoted", hasVoted)
     return (
         <div className='flex flex-col'>
             <div className="w-full">
                 {getVoteSectionButton()}
             </div>
-            <CountdownBar />
+            {curMode === AppMode.Item && <CountdownBar />}
         </div>
     );
 }

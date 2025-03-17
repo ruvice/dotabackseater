@@ -6,10 +6,10 @@ const twitch = window.Twitch.ext;
 // onAuthorized callback called each time JWT is fired
 twitch.onAuthorized((auth) => {
   // save our credentials
-  console.log("got auth in live_config", auth)
   token = auth.token; //JWT passed to backend for authentication 
   userId = auth.userId; //opaque userID 
   channelID = auth.channelId;
+  console.log(auth, channelID)
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function startVote() {
     const voteDuration = document.getElementById('voteDuration').value
-    const url = "http://localhost:3000/vote/hero/start";
-    // const url = "https://dotabackseater.ruvice.com/vote/hero/start";
+    // const url = "http://localhost:3000/vote/hero/start";
+    const url = "https://dotabackseater.ruvice.com/vote/hero/start";
     try {
         const response = await fetch(url, {
             method: "POST", // HTTP method,
             headers: {
-                "channel-id": 40825038
+                "channel-id": channelID
             },
             body: JSON.stringify({
                 'duration': voteDuration
@@ -51,13 +51,13 @@ async function startVote() {
 }
 
 async function stopVote() {
-    const url = "http://localhost:3000/vote/hero/stop";
-    // const url = "https://dotabackseater.ruvice.com/vote/hero/stop";
+    // const url = "http://localhost:3000/vote/hero/stop";
+    const url = "https://dotabackseater.ruvice.com/vote/hero/stop";
     try {
         const response = await fetch(url, {
             method: "POST", // HTTP method,
             headers: {
-                "channel-id": 40825038
+                "channel-id": channelID
             },
         });
   

@@ -27,14 +27,14 @@ function VoteSectionValidButton(props: VoteSectionValidProps) {
     // Re-evaluate `isCooldown` periodically
     useEffect(() => {
         const interval = setInterval(() => {
-            setIsCooldown(countdown > Date.now());
+            setIsCooldown(countdown > Date.now() && curMode === AppMode.Item);
             if (countdown < Date.now()) {
                 clearInterval(interval)
             }
         }, 500); // Check every 500ms
         
         return () => clearInterval(interval); // Cleanup the interval on unmount
-    }, [countdown]);
+    }, [countdown, curMode]);
     return (
         <>
             <div className={isCooldown ? "tinted-container" : ""}>
