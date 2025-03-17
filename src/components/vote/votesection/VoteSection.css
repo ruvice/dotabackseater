@@ -1,11 +1,11 @@
 .vote-sectionValid {
-    @apply bg-dota-selection-green h-[50px] rounded border-2 border-border-color cursor-pointer hover:border-dota-text-white select-none
+    @apply bg-dota-selection-green h-[50px] rounded cursor-pointer border-2 border-transparent hover:border-dota-text-white select-none
 }
 .vote-sectionCooldown {
-    @apply bg-dota-selection-green h-[50px] rounded border-2 border-border-color select-none cursor-not-allowed
+    @apply bg-dota-selection-green h-[50px] rounded border-2 border-transparent select-none cursor-not-allowed
 }
 .vote-sectionInvalid {
-    @apply bg-dota-selection-red h-[50px] rounded border-2 border-border-color select-none
+    @apply bg-dota-selection-red h-[50px] rounded border-2 border-transparent select-none
 }
 
 .tinted-container {
@@ -24,4 +24,27 @@
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.6); /* Tint color */
     pointer-events: none; /* Makes the overlay non-interactive */
+}
+
+.valid-button {
+    display: grid;
+    grid-template-columns: 60px auto;
+    box-sizing: border-box;
+}
+
+.valid-button-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.valid-button-cell {
+    height: 34px;
+}
+
+.valid-button-text {
+    display: flex;
+    align-items: center;
+    transform: scale(1);
+    max-width: 100%;
 }

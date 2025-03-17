@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import "./VoteSection.css"
 import { RootState } from "../../../store/store";
 import { AppMode } from "../../../store/appSlice";
+import { useMemo } from "react";
 
 function VoteSectionInvalidButton() {
 
@@ -9,7 +10,7 @@ function VoteSectionInvalidButton() {
     const hasActiveHeroVoteSession = useSelector((state: RootState) => state.vote.hasActiveHeroVoteSession);
     const hasVoted = useSelector((state: RootState) => state.vote.hasVoted);
 
-    const getMessage = () => {
+    const message = useMemo(() => {
         if (curMode === AppMode.Hero) {
             if (hasActiveHeroVoteSession) {
                 if (!hasVoted) {
@@ -23,12 +24,11 @@ function VoteSectionInvalidButton() {
         } else {
             return "Select an item to vote"
         }
-    }
+    }, [curMode, hasActiveHeroVoteSession, hasVoted]);
 
     return (
         <div className="vote-sectionInvalid flex justify-center">
-            {/* <p className="text-dota-text-white self-center">Select {curMode === AppMode.Hero ? "a hero" : "an item"} to vote</p> */}
-            <p className="text-dota-text-white self-center">{getMessage()}</p>
+            <p className="text-dota-text-white self-center">{message}</p>
         </div>
     );
 }

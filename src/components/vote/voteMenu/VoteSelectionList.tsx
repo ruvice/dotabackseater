@@ -32,7 +32,7 @@ function VoteSelectionList() {
     }, [itemsArr, query]); // Re-runs when `someDependency` changes
 
     return (
-        <div className="item-list-container h-[182px] custom-scrollbar">
+        <div className="item-list-container h-[192px] custom-scrollbar">
             {(curMode === AppMode.Item) && (itemLoading ? <p>Loading...</p> : items)}
             {(curMode === AppMode.Hero) && (heroLoading ? <p>Loading...</p> : heroes)}
         </div>

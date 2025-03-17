@@ -2,7 +2,11 @@
 
 @layer components {
     .minimised-hero-list {
-        background-color: #282828; /* Card background */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 76px;
     }
     .minimised-hero-no-vote {
         display: flex;
@@ -21,21 +25,7 @@
         column-gap: 2px; /* ✅ Controls horizontal spacing */
         row-gap: 4px; /* ✅ Controls vertical spacing */
         margin: auto;
-        height: 48px;
         position: relative;
-    }
-    .container {
-        list-style: "none";
-        padding: 0;
-        margin: 0;
-        position: "relative";
-        display: "flex";
-        flex-wrap: "wrap";
-        gap: 10;
-        width: 50;
-        flex-direction: row;
-        justify-content: "center";
-        align-items: "center";
     }
     .grid-item {
         border: 1px solid #444; /* Optional border for card */
@@ -43,7 +33,7 @@
         text-align: center;
         border-radius: 5px;
         height: 28px;
-        max-width: 80px;
+        width: 80px;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -2,15 +2,56 @@
 
 @layer components {
     .header {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        width: 294px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+      }
+      
+    .tab {
+        height: 38px;
+        position: relative;
         display: flex;
         flex-direction: row;
+        justify-content: center;
         align-items: center;
-        height: 48px;
-        justify-content: space-evenly;
     }
-    .header_tab {
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: all 0.25s ease-in-out; /* ✅ Smooth animations */  
+      
+    /* The animated border */
+    .tab::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;  /* Keep width full, animate with scaleX instead */
+        height: 3px;
+        background-color: white;
+        transform: scaleX(0);  /* Start hidden */
+        transition: transform 0.4s ease-in-out;
+    }
+  
+    /* Hover effect - Expand */
+    .tab.active::after {
+        transform: scaleX(1);
+    }
+  
+    /* Left tab - Shrink from right to left */
+    .tab-left.active::after {
+        transform-origin: right;
+    }
+    
+    .tab-left.removing::after {
+        transform-origin: right; /* Shrinks right to left */
+    }
+    
+    /* Right tab - Shrink from left to right */
+    .tab-right.active::after {
+        transform-origin: left;
+    }
+    
+    .tab-right.removing::after {
+        transform-origin: left; /* Shrinks left to right */
     }
 }

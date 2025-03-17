@@ -1,5 +1,4 @@
 import "./VoteSelectionSection.css"
-import { useSelector } from 'react-redux';
 import VoteSelectionList from "../vote/voteMenu/VoteSelectionList";
 import Search from "../search/Search";
 

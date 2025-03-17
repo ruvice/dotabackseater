@@ -8,13 +8,11 @@ import { StreamerConfig } from './models/streamerConfig';
 import Panel from './components/panel/Panel';
 import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
 import Header from './components/panel/Header';
-
 // Define the type of the data being fetched
 function App() {
     // Initial setup
     const dispatch = useDispatch<AppDispatch>()
   
-    const selectedMode = useSelector((state: RootState) => state.app.mode);
     useEffect(() => {
         window.Twitch.ext.onAuthorized(function(auth) {
             dispatch(updateUserId(auth.userId))
@@ -56,11 +54,9 @@ function App() {
   }, [dispatch])
 
   return (
-    // <Reordering />
-    <div className="bg-dota-dark-tile-background max-h-[496px] h-[496px] w-[318px] max-w-[318px] p-3 overflow-hidden relative">
+    <div className="app-container bg-dota-dark-tile-background max-h-[496px] h-[496px] w-[318px] max-w-[318px] p-3 overflow-hidden relative">
         <Header />
         <Panel />
-        {/* { selectedMode === AppMode.Hero ? <>HeroSection</> : <ItemSection />} */}
         <VoteSelectionSection />
         <VoteSection />
         <Tooltip />

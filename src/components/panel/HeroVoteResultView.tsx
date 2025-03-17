@@ -23,7 +23,7 @@ const MinimizedView = (props: MinimizedViewProps) => {
             {heroVotesArr.length === 0 && <p className='text-dota-text-white'>No votes in yet!</p>}
         </div>
         {heroVotesArr.length > 0 &&
-            <div className="grid-container">
+            <div className="grid-container bg-dota-panel-item-box">
                 {heroVotesArr.slice(0, 6).map((heroVote: HeroVote) => (
                     <motion.div 
                         key={heroVote.hero.id}
@@ -58,10 +58,8 @@ const HeroVoteResultView = () => {
         }
     }, [JSON.stringify(heroVoteMap), heroes])
     return (
-        <div className="minimised-hero-list flex flex-col rounded-lg mt-1 p-2">
-            <div className="h-[60px]">
-                <MinimizedView heroVotesArr={heroVoteArr} />
-            </div>
+        <div className="minimised-hero-list bg-dota-panel-item-box rounded-lg mt-1 p-2">
+            <MinimizedView heroVotesArr={heroVoteArr} />
         </div>
   )
 }

@@ -40,15 +40,15 @@ function VoteSectionValidButton(props: VoteSectionValidProps) {
             <div className={isCooldown ? "tinted-container" : ""}>
                 {isCooldown && <div className="overlay"></div>}
                 <div
-                    className={`${
+                    className={`valid-button ${
                     isCooldown ? "vote-sectionCooldown" : "vote-sectionValid"
                     } flex flex-row p-2 align-middle`}
                     onClick={handleVote}
                 >
-                    <div className="h-[21] align-center ml-4">
-                        <LazyImage imageName={voteSelection.image_name} height={21} width={28.3} />
+                    <div className="valid-button-cell valid-button-image">
+                        <LazyImage imageName={voteSelection.image_name} height={31.5} width={42.5} />
                     </div>
-                    <p className="text-dota-text-white pl-3 font-semibold self-center">Vote {voteSelection.display_name}</p>
+                    <p className="valid-button-cell valid-button-text text-dota-text-white font-semibold">Vote {voteSelection.display_name}</p>
                 </div>
             </div>
         </>

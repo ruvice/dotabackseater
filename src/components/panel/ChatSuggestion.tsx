@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Item } from '../../models/models'
 import { RootState } from '../../store/store'
@@ -6,11 +6,10 @@ import LazyImage from '../vote/voteMenu/LazyImage'
 import "./ChatSuggestion.css"
 
 const ChatSuggestion = () => {
-    const [item, setItem] = useState<Item | null>(null)
     const lastVotedItem = useSelector((state: RootState) => state.event.lastChatVotedItemID)
     const items = useSelector((state: RootState) => state.item.items)
-    useEffect(() => {
-        setItem(items[lastVotedItem])
+    const item: Item | null = useMemo(() => {
+        return items[lastVotedItem] || null;
     }, [lastVotedItem, items])
     return (
         <div className="chat-suggestion flex flex-col bg-dota-panel-item-box rounded-lg mt-1 p-2">

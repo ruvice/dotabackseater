@@ -16,12 +16,12 @@ function Header() {
     const curMode = useSelector((state: RootState) => state.app.mode)
     return (
         <div className="header">
-            <motion.div className={`header_tab rounded-t-md mt-1 p-2 w-[150px] ${curMode === AppMode.Hero ? "border-white border bg-dota-panel-item-box-active" : "bg-dota-panel-item-box"}`} onClick={() => handleClick(AppMode.Hero)}>
+            <div className={`tab tab-left ${curMode === AppMode.Hero ? 'active bg-dota-panel-item-box-active' : 'removing bg-dota-panel-item-box'} `} onClick={() => handleClick(AppMode.Hero)}>
                 <p className="text-dota-text-white text-l pl-2 font-bold">Hero</p>
-            </motion.div>
-            <motion.div className={`header_tab rounded-t-md mt-1 p-2 w-[150px] ${curMode === AppMode.Item ? "border-white border bg-dota-panel-item-box-active" : "bg-dota-panel-item-box"}`}  onClick={() => handleClick(AppMode.Item)}>
+            </div>
+            <div className={`tab tab-right ${curMode === AppMode.Item ? 'active bg-dota-panel-item-box-active' : 'removing bg-dota-panel-item-box'}`} onClick={() => handleClick(AppMode.Item)}>
                 <p className="text-dota-text-white text-l pl-2 font-bold">Item</p>
-            </motion.div>
+            </div>
         </div>
   )
 }
