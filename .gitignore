@@ -27,3 +27,4 @@ yarn-error.log*
 *.webp
 *.jpg
 server.*
+notes.txt

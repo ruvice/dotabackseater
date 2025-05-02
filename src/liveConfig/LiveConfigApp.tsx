@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
-import VoteSection from './components/vote/votesection/VoteSection';
-import Tooltip from './components/tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateChannelId, updateClientId, updateToken, updateUserId, updateStreamerConfig, getHeroes, 
-    AppDispatch, RootState, getExtensionHeroVoteStatus, getExtensionItemVoteStatus, getItems } from './store/index';
-import { StreamerConfig } from './models/streamerConfig';
-import Panel from './components/panel/Panel';
-import VoteSelectionSection from './components/voteSelectionSection/VoteSelectionSection';
-import Header from './components/panel/Header';
-import ToastManager from './components/toast/ToastManager';
+    AppDispatch, RootState, getExtensionHeroVoteStatus, getExtensionItemVoteStatus, getItems } from '../store/index';
+import { StreamerConfig } from '../models/streamerConfig';
+import ToastManager from '../components/toast/ToastManager';
+import VoteManager from './VoteManager';
+import HeroVoteLiveResultView from './HeroVoteLiveResultView';
+import App from '../App';
+import './LiveConfigApp.css'
 // Define the type of the data being fetched
-function App() {
+function LiveConfigApp() {
     // Initial setup
     const dispatch = useDispatch<AppDispatch>()
-  
     useEffect(() => {
         window.Twitch.ext.onAuthorized(function(auth) {
             dispatch(updateUserId(auth.userId))
@@ -33,9 +31,9 @@ function App() {
                                 "Channel-Id": auth.channelId
                         }
                     });
-                if (!response.ok) { 
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+                    if (!response.ok) { 
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
                     const streamerConfig: StreamerConfig = await response.json();
                     dispatch(updateStreamerConfig(streamerConfig))
                     // dispatch({ type: 'events/startListening', payload: { channelID: auth.channelId } });
@@ -57,15 +55,16 @@ function App() {
   }, [dispatch])
 
   return (
-    <div className="app-container bg-dota-dark-tile-background max-h-[496px] h-[496px] w-[318px] max-w-[318px] p-3 overflow-hidden relative">
-        {/* <Header /> */}
-        <Panel />
-        <VoteSelectionSection />
-        <VoteSection />
-        <Tooltip />
-        <ToastManager />
-    </div>
+    <>
+        <div className="bg-dota-panel-background grid-layout">
+            <div className='header'>
+                <h1 className="text-dota-text-white text-lg font-bold header text-center">Manage Hero Vote Sessions</h1>
+            </div>
+            <div className='left'><VoteManager /></div>
+            <div className='right'><HeroVoteLiveResultView /></div>
+        </div>
+    </>
   );
 }
 
-export default App;
+export default LiveConfigApp;

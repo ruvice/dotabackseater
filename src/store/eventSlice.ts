@@ -72,7 +72,7 @@ export const getExtensionHeroVoteStatus = createAsyncThunk('getExtensionHeroVote
     }
     const result: FetchExtensionHeroVoteStatusResult = await response.json();
     dispatch(setHasActiveVoteSession(result.has_active_vote_session))
-    dispatch(setHasVoted(result.has_voted))
+    // dispatch(setHasVoted(result.has_voted))
     return result
 });
 

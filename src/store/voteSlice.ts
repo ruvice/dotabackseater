@@ -103,6 +103,59 @@ export const castHeroVote = createAsyncThunk('voteHero', async (_, { getState, d
     }
 });
 
+
+export const startHeroVote = createAsyncThunk('startHeroVote', async (voteDuration: number, { getState, dispatch, rejectWithValue }) => {
+    const state = getState() as RootState; // Cast the state to RootState type
+    const channelId = state.twitch.channelId; // Access the channelId from the state
+
+    const apiURL =
+    process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_SERVER_URI
+        : process.env.REACT_APP_API_DEV;
+    console.log(voteDuration)
+    try {
+        const response = await fetch(apiURL + "vote/hero/start", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Channel-Id': channelId
+            },
+            body: JSON.stringify({
+                'duration': voteDuration
+            })
+        })
+        if (!response.ok) {
+            throw new Error('Failed to start voting session');
+        }
+    } catch(err) {
+        throw new Error('Failed to send')
+    }
+});
+
+export const stopHeroVote = createAsyncThunk('stopHeroVote', async (_, { getState, dispatch, rejectWithValue }) => {
+    const state = getState() as RootState; // Cast the state to RootState type
+    const channelId = state.twitch.channelId; // Access the channelId from the state
+
+    const apiURL =
+    process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_SERVER_URI
+        : process.env.REACT_APP_API_DEV;
+    try {
+        const response = await fetch(apiURL + "vote/hero/stop", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Channel-Id': channelId
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Failed to stop voting session');
+        }
+    } catch(err) {
+        throw new Error('Failed to send')
+    }
+});
+
 const voteSlice = createSlice({
   name: 'vote',
   initialState,

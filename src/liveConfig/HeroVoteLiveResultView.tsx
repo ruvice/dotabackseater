@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Hero, HeroVoteMap, Item } from '../../models/models'
-import { RootState } from '../../store/store'
-import LazyImage from '../vote/voteMenu/LazyImage'
+import { Hero, HeroVoteMap, Item } from '../models/models'
+import { RootState } from '../store'
+import LazyImage from '../components/vote/voteMenu/LazyImage'
 import { AnimatePresence, motion } from "framer-motion";
-import "./HeroVoteResultView.css"
+import "./HeroVoteLiveResultView.css"
 
 interface HeroVote {
     hero: Hero,
@@ -13,16 +13,17 @@ interface HeroVote {
 interface MinimizedViewProps {
     heroVotesArr: HeroVote[]
 }
-const MinimizedView = (props: MinimizedViewProps) => {
+const MaximisedView = (props: MinimizedViewProps) => {
     
     const {heroVotesArr} = props
+    
     return (
     <>
-        <div className='minimised-hero-no-vote'>
+        <div className='maximised-hero-no-vote'>
             {heroVotesArr.length === 0 && <p className='text-dota-text-white'>No votes in yet!</p>}
         </div>
         {heroVotesArr.length > 0 &&
-            <div className="grid-container bg-dota-panel-item-box">
+            <div className="maximised-grid-container bg-dota-panel-item-box">
                 {heroVotesArr.slice(0, 6).map((heroVote: HeroVote) => (
                     <motion.div 
                         key={heroVote.hero.id}
@@ -31,9 +32,13 @@ const MinimizedView = (props: MinimizedViewProps) => {
                         exit={{ opacity: 0, scale: 0 }}
                         transition={{ type: "spring", damping: 20, stiffness: 200 }}
                         layout
-                        className="grid-item bg-dota-panel-item-box-active"
+                        className="maximised-grid-item bg-dota-panel-item-box-active"
                     >
-                        <LazyImage imageName={heroVote.hero.hero_name + "_icon"} height={24} width={24}/> <p className='text-dota-text-white text-xs ml-2'>{heroVote.voteCount}</p>
+                        <div className="maximised-hero-vote-result-item grid-cols-[30px_300px_1fr]">
+                            <LazyImage imageName={heroVote.hero.hero_name + "_icon"} height={24} width={24}/>
+                            <p className='text-dota-text-white text-xs ml-2'>{heroVote.hero.name}</p>
+                            <p className='text-dota-text-white text-xs ml-2'>{heroVote.voteCount}</p>
+                        </div>
                     </motion.div>
                 ))}
             </div>
@@ -41,11 +46,11 @@ const MinimizedView = (props: MinimizedViewProps) => {
     </>
 )}
 
-const HeroVoteResultView = () => {
+const HeroVoteLiveResultView = () => {
     const [heroVoteArr, setHeroVoteArr] = useState<HeroVote[]>([])
     const heroVoteMap = useSelector((state: RootState) => state.event.heroVoteMap)
     const heroes = useSelector((state: RootState) => state.hero.heroes)
-    const [isMinimised, setIsMinimised] = useState<boolean>(true)
+    const hasActiveSession = useSelector((state: RootState) => state.vote.hasActiveHeroVoteSession)
     useEffect(() => {
         if (heroVoteMap != undefined && heroes != undefined) {
             const newHeroVoteArr = Object.entries(heroVoteMap)
@@ -57,10 +62,11 @@ const HeroVoteResultView = () => {
         }
     }, [JSON.stringify(heroVoteMap), heroes])
     return (
-        <div className="minimised-hero-list bg-dota-panel-item-box rounded-lg mt-1 p-2">
-            <MinimizedView heroVotesArr={heroVoteArr} />
+        <div className="maximised-hero-list bg-dota-panel-item-box rounded-lg mt-1 p-2">
+            <p className='text-dota-text-white text-lg font-bold ml-2'>{hasActiveSession ? 'Voting Active' : 'Voting Ended'}</p>
+            <MaximisedView heroVotesArr={heroVoteArr} />
         </div>
   )
 }
 
-export default HeroVoteResultView
+export default HeroVoteLiveResultView

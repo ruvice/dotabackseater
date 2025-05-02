@@ -9,7 +9,6 @@ twitch.onAuthorized((auth) => {
   token = auth.token; //JWT passed to backend for authentication 
   userId = auth.userId; //opaque userID 
   channelID = auth.channelId;
-  console.log(auth, channelID)
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function startVote() {
     const voteDuration = document.getElementById('voteDuration').value
-    // const url = "http://localhost:3000/vote/hero/start";
-    const url = "https://dotabackseater.ruvice.com/vote/hero/start";
+    const url = "http://localhost:3000/vote/hero/start";
+    // const url = "https://dotabackseater.ruvice.com/vote/hero/start";
     try {
         const response = await fetch(url, {
             method: "POST", // HTTP method,
@@ -51,8 +50,8 @@ async function startVote() {
 }
 
 async function stopVote() {
-    // const url = "http://localhost:3000/vote/hero/stop";
-    const url = "https://dotabackseater.ruvice.com/vote/hero/stop";
+    const url = "http://localhost:3000/vote/hero/stop";
+    // const url = "https://dotabackseater.ruvice.com/vote/hero/stop";
     try {
         const response = await fetch(url, {
             method: "POST", // HTTP method,
@@ -69,13 +68,12 @@ async function stopVote() {
     }
 }
 
-
 async function updateConfig(){
   twitch.configuration.set("broadcaster", "1", JSON.stringify(voteThreshold.value))
   const currentVoteThreshold = document.getElementById('currentVoteThreshold')
   currentVoteThreshold.textContent = voteThreshold.value
-//   const url = "http://localhost:3000/config/" + channelID;
-  const url = "https://dotabackseater.ruvice.com/config/" + channelID;
+  const url = "http://localhost:3000/config/" + channelID;
+//   const url = "https://dotabackseater.ruvice.com/config/" + channelID;
   try {
     const response = await fetch(url, {
         method: "POST", // HTTP method,

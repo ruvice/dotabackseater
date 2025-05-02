@@ -8,6 +8,7 @@ import appReducer from './appSlice'
 import heroReducer from './heroSlice'
 import toastReducer from './toastSlice'
 import { sseMiddleware } from '../events/eventsMiddleware';
+import { websocketMiddleware } from '../events/wsMiddleware';
 const store = configureStore({
   reducer: {
     vote: voteReducer,
@@ -20,7 +21,7 @@ const store = configureStore({
     toast: toastReducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sseMiddleware),
+    getDefaultMiddleware().concat(websocketMiddleware),
 });
 
 // Type definitions for the store and dispatch
